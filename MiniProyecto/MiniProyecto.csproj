@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="GestordeTareas.cs" />
+    <Compile Include="Lista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="To_do.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
