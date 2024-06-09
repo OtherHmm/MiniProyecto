@@ -7,6 +7,7 @@ namespace MiniProyecto
         static void Main(string[] args)
         {
             bool Salir = false;
+
             GestorDeTareas gestor = new GestorDeTareas();
 
             do
@@ -19,7 +20,7 @@ namespace MiniProyecto
                 Console.WriteLine("3. Completar Tarea");
                 Console.WriteLine("4. Mostrar Todas las Tareas");
                 Console.WriteLine("5. Salir");
-
+              
                 string opcion = Console.ReadLine();
 
                 switch (opcion)

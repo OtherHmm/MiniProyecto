@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 namespace MiniProyecto
 {
-    public class ListaDeTareas 
+    public class Compendio
     {
 
         //Lista
+
         private List<string> Tareas = new List<string>();
 
         //Metodos
@@ -21,10 +22,8 @@ namespace MiniProyecto
         public void EliminarTarea(string tarea)
         {
             Tareas.Remove(tarea);
-            Console.WriteLine("Tarea eliminada.");
+            Console.WriteLine("Tarea eliminada");
             Console.ReadKey();
-
-
         }
         public string BuscarTarea(string titulo)
         {

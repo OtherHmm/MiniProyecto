@@ -13,11 +13,9 @@ namespace MiniProyecto
         public string Categoria;
         public bool Estado;
 
-        public To_do(string titulo /*, string descripcion, string categoria*/)
+        public To_do(string titulo)
         {
             Titulo = titulo;
-            /*Descripcion = descripcion;
-            Categoria = categoria;*/
             Estado = false;
         }
 
