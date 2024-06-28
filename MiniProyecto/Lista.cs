@@ -37,6 +37,11 @@ namespace MiniProyecto
             return "Tarea no encontrada";
 
         }
+
+        public void EditarTarea(string titulo)
+        {
+
+        }
         public void MostrarTareas()
         {
             foreach (var tarea in Tareas)
@@ -47,7 +52,7 @@ namespace MiniProyecto
         } 
         public void Completar(string tarea)
         {
-            To_do to_Do = new To_do(tarea);
+            ToDo to_Do = new To_do(tarea);
 
             to_Do.Completar();
             Console.ReadKey();

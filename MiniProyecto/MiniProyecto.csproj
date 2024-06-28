@@ -44,10 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
-    <Compile Include="GestordeTareas.cs" />
     <Compile Include="Lista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="To_do.cs" />
+    <Compile Include="ToDo.cs" />
+    <Compile Include="ToDo_Estudio.cs" />
+    <Compile Include="ToDo_Personal.cs" />
+    <Compile Include="ToDo_Trabajo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
