@@ -21,9 +21,11 @@ namespace MiniProyecto
 
             do
             {
-                // bienvenida
+                try
+                {
+                    // bienvenida
 
-                Console.WriteLine("Lista de tareas\n");
+                    Console.WriteLine("Lista de tareas\n");
                 Console.WriteLine("Para ver detalles de una tarea digite el numero\n");
 
                 // lista de tareas
@@ -126,7 +128,44 @@ namespace MiniProyecto
                         MensajeError();
                         break;
                 }
+             }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error, intentelo de nuevo.");
+                }
+                catch (FormatException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Ingrese los datos de manera correcta, por favor.");
+                }
+                catch (OverflowException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error, intentelo de nuevo");
+                }
+                catch (NullReferenceException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error, intentelo de nuevo");
+                }
+                catch (StackOverflowException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error, intentelo de nuevo");
+                }
+                catch (TypeInitializationException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error, intentelo de nuevo");
+                }
+                catch (Exception)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error, intentelo de nuevo");
+                }
             } while (!Salir);
+
         }
 
         // Metodos
@@ -161,5 +200,6 @@ namespace MiniProyecto
             }
             Console.WriteLine("");
         } 
+
     }
 }
