@@ -103,14 +103,13 @@ namespace MiniProyecto
                             switch (Convert.ToByte(Console.ReadLine()))
                             {
                                 case 1:
-                                    Tareas[nTarea] = default;
-                                    ToDo.BorrarInfo(nTarea);
-                                    break;
-                                case 2:
-
                                     Console.Write("Ingrese el nuevo título de la tarea: ");
                                     Tareas[nTarea] = Console.ReadLine();
                                     ToDo.EditarInfo(nTarea);
+                                    break;
+                                case 2:
+                                    Tareas[nTarea] = default;
+                                    ToDo.BorrarInfo(nTarea);
                                     break;
                                 case 3:
                                     Cancelar = true;

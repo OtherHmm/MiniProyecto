@@ -43,7 +43,7 @@ namespace MiniProyecto
         }
         public virtual void EditarInfo(byte nTarea)
         {
-            Console.Write("Ingrese la nueva tipo de la tarea: ");
+            Console.Write("Ingrese el nuevo tipo de la tarea: ");
             Tipos[nTarea] = Console.ReadLine();
             Console.Write("Ingrese la nueva descripción de la tarea: ");
             Detalles[nTarea] = Console.ReadLine();
