@@ -1,42 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MiniProyecto
 {
-    /*
-    public class To_do
-    {
-        public string Titulo;
-        public string Descripcion;
-        public string Categoria;
-        public bool Estado;
-
-        public To_do(string titulo)
-        {
-            Titulo = titulo;
-            Estado = false;
-        }
-
-        public void Completar()
-        {
-            Estado = true;
-            Console.WriteLine("Tarea Completada");
-        }
-
-        public virtual void MostrarInformacion()
-        {
-            Console.WriteLine($"Título: {Titulo}");
-            Console.WriteLine($"Descripción: {Descripcion}");
-            Console.WriteLine($"Categoría: {Categoria}");
-            Console.WriteLine($"Estado: {Estado}");
-        }
-    }*/
-
     public class ToDo
     {
         private string[] Lista      = new string[15]; // tareas
         private string[] Nombre     = new string[15]; // nombre de la tarea
-        private string[] Tipo       = new string[5];  // categoria de la tarea
+        private string[] Tipo       = new string[15]; // categoria de la tarea
         private string[] Detalles   = new string[15]; // descripcion de la tarea
 
         // Constructor
@@ -49,6 +21,7 @@ namespace MiniProyecto
         }
 
         // Métodos 
+
         public virtual void AgregarInfo(string tipo, string nombre, string detalles)
         {
             for (int i = 0; i < 5; i++)
@@ -79,18 +52,27 @@ namespace MiniProyecto
             Console.ReadKey();
         }
 
-        public virtual void SeleccionarTarea(byte opcion)
+        public virtual byte SeleccionarTarea(string nombre)
         {
-            
+            for (byte i = 0; i < Lista.Length; i++)
+            {
+                if (Lista[i] == nombre)
+                {
+                    return i;
+                }
+                else
+                {
+                    Console.WriteLine("Tarea no encontrada");
+                }
+            }
+            return default;
         }
 
-
-        public virtual void MostrarInfo()
+        public virtual void MostrarInfo(byte opcion)
         {
-            Console.WriteLine($"Tarea {Tipo}");
-            Console.WriteLine($"{Nombre}   ");
-            Console.WriteLine($"{Detalle}");
-            
+            Console.WriteLine($"Tarea {Tipo[opcion]}");
+            Console.WriteLine($"\n{Nombre[opcion]}");
+            Console.WriteLine($"{Detalles[opcion]}");
         }
         public virtual void MostrarTareas()
         {

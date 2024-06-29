@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection.Emit;
 
 namespace MiniProyecto
 {
@@ -14,10 +13,10 @@ namespace MiniProyecto
             bool Salir = false;
             bool Cancelar = false;
 
-            ToDo            ToDo            = new ToDo          (Nombre, Tipo, Detalle);
-            ToDo_Personal   TareaPersonal   = new ToDo_Personal (Nombre, Tipo, Detalle);
-            ToDo_Trabajo    TareaTrabajo    = new ToDo_Trabajo  (Nombre, Tipo, Detalle);
-            ToDo_Estudio    TareaEstudio    = new ToDo_Estudio  (Nombre, Tipo, Detalle);
+            ToDo ToDo = new ToDo(Nombre, Tipo, Detalle);
+            ToDo_Personal TareaPersonal = new ToDo_Personal(Nombre, Tipo, Detalle);
+            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(Nombre, Tipo, Detalle);
+            ToDo_Estudio TareaEstudio = new ToDo_Estudio(Nombre, Tipo, Detalle);
 
             do
             {
@@ -39,7 +38,8 @@ namespace MiniProyecto
                 {
                     do
                     {
-                        ToDo.MostrarInfo();
+                        byte opcion = Convert.ToByte(Console.ReadLine());
+                        ToDo.MostrarInfo(opcion);
 
                         Console.WriteLine("1. Editar tarea");
                         Console.WriteLine("2. Borrar tarea");
@@ -49,6 +49,13 @@ namespace MiniProyecto
                         {
                             case 1:
                                 // Editar
+
+                                //insartr metodfo de busqueda
+                                /*
+                                if (tarea != null)
+                                {
+                                    Console.WriteLine("Tarea Editada.");
+                                }*/
                                 break;
                             case 2:
                                 ToDo.BorrarInfo(Convert.ToByte(Console.ReadLine()));
@@ -60,8 +67,6 @@ namespace MiniProyecto
                                 break;
                         }
                     } while (!Cancelar);
-                    
-
                 }
                 switch (Console.ReadLine())
                 {
@@ -97,7 +102,6 @@ namespace MiniProyecto
 
                                     Cancelar = true;
                                     break;
-
                                 default:
                                     Console.WriteLine("Tipo de tarea no válido.");
                                     return;
@@ -123,22 +127,6 @@ namespace MiniProyecto
             nombre = Console.ReadLine();
             Console.WriteLine("Digite la descripcion");
             detalle = Console.ReadLine();
-        }
-
-        public static void EditarTarea()
-        {
-            Console.WriteLine("Ingrese el título de la tarea a editar:");
-            string tarea = Compendio.BuscarTarea(Console.ReadLine());
-
-            if (tarea != null)
-            {
-                Compendio.EditarTarea(tarea);
-                Console.WriteLine("Tarea Editada.");
-            }
-        }
-        public static void OrdenarTareas()
-        {
-
         }
         public static void MensajeError()
         {
