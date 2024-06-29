@@ -23,7 +23,7 @@ namespace MiniProyecto
                 // bienvenida
 
                 Console.WriteLine("Lista de tareas\n");
-                Console.WriteLine("Para seleccionar y ver detalles de uan tarea digite el numero de la tarea");
+                Console.WriteLine("Para ver detalles de una tarea digite el numero\n");
 
                 // lista de tareas
 
@@ -103,12 +103,13 @@ namespace MiniProyecto
                                     Cancelar = true;
                                     break;
                                 default:
-                                    Console.WriteLine("Tipo de tarea no válido.");
+                                    MensajeError();
                                     return;
                             }
                         } while (!Cancelar);
                         break;
                     case "b":
+                        // metodo de ordenacion
                         break;
                     default:
                         MensajeError();

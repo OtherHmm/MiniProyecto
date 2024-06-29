@@ -15,22 +15,22 @@ namespace MiniProyecto
 
         public ToDo(string tipo, string nombre, string detalles) 
         {
-            Nombre[default] = nombre;
-            Tipo[default] = tipo;
-            Detalles[default] = detalles;
+            Nombre      [default] = nombre;
+            Tipo        [default] = tipo;
+            Detalles    [default] = detalles;
         }
 
         // Métodos 
 
         public virtual void AgregarInfo(string tipo, string nombre, string detalles)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < Lista.Length; i++)
             {
                 if (Tipo[i] == default && Nombre[i] == default && Detalles[i] == default)
                 {
-                    Tipo[i] = tipo;
-                    Nombre[i] = nombre;
-                    Detalles[i] = detalles;
+                    Tipo        [i] = tipo;
+                    Nombre      [i] = nombre;
+                    Detalles    [i] = detalles;
                     break;
                 }
                 else if (Tipo[4] != default && Nombre[4] != default && Detalles[4] != default)
@@ -44,9 +44,9 @@ namespace MiniProyecto
         }
         public virtual void BorrarInfo(byte opcion)
         {
-            Tipo[opcion] = default;
-            Nombre[opcion] = default;
-            Detalles[opcion] = default;
+            Tipo        [opcion] = default;
+            Nombre      [opcion] = default;
+            Detalles    [opcion] = default;
 
             Console.WriteLine("Tarea Eliminada con exito");
             Console.ReadKey();
@@ -76,7 +76,7 @@ namespace MiniProyecto
         }
         public virtual void MostrarTareas()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < Lista.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {Nombre[i]} {Tipo[i]}");
             }

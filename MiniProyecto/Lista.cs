@@ -52,10 +52,10 @@ namespace MiniProyecto
         } 
         public void Completar(string tarea)
         {
-            ToDo to_Do = new To_do(tarea);
+            //ToDo to_Do = new To_do(tarea);
 
-            to_Do.Completar();
-            Console.ReadKey();
+            //to_Do.Completar();
+            //Console.ReadKey();
         }
     }
 }
