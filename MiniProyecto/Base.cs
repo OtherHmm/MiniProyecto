@@ -72,7 +72,8 @@ namespace MiniProyecto
                                     TareaPersonal.AgregarInfo("Personal",  detalle, indice);
 
                                     break;
-                                case 4:
+                                case 0:
+                                    Console.Clear();
                                     Cancelar = true;
                                     break;
                                 default:
@@ -112,6 +113,7 @@ namespace MiniProyecto
                                     ToDo.BorrarInfo(nTarea);
                                     break;
                                 case 3:
+                                    Console.Clear();
                                     Cancelar = true;
                                     break;
                                 default:
@@ -184,6 +186,7 @@ namespace MiniProyecto
             ContadorTareas++;
 
             Console.WriteLine("Tarea agregada exitosamente.");
+            
         }
         public static void MensajeError()
         {
