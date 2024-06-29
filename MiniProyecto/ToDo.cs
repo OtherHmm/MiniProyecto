@@ -6,88 +6,47 @@ namespace MiniProyecto
 {
     public class ToDo
     {
-        private string[] Lista      = new string[15]; // tareas
-        private string[] Nombre     = new string[15]; // nombre de la tarea
-        private string[] Tipo       = new string[15]; // categoria de la tarea
-        private string[] Detalles   = new string[15]; // descripcion de la tarea
+         string[] Tipos = new string[15]; // categoria de la tarea
+         string[] Detalles = new string[15]; // descripcion de la tarea
+
 
         // Constructor
 
-        public ToDo(string tipo, string nombre, string detalles) 
+        public ToDo(string tipo, string detalle, byte nTarea)
         {
-            Nombre      [default] = nombre;
-            Tipo        [default] = tipo;
-            Detalles    [default] = detalles;
+            Tipos[nTarea] = tipo;
+            Detalles[nTarea] = detalle;
         }
 
         // Métodos 
 
-        public virtual void AgregarInfo(string tipo, string nombre, string detalles)
+        public virtual void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
-            for (int i = 0; i < Lista.Length; i++)
-            {
-                if (Tipo[i] == default && Nombre[i] == default && Detalles[i] == default)
-                {
-                    Tipo        [i] = tipo;
-                    Nombre      [i] = nombre;
-                    Detalles    [i] = detalles;
-                    break;
-                }
-                else if (Tipo[4] != default && Nombre[4] != default && Detalles[4] != default)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Capacidad maxima ya alcanzada");
-                    Console.ReadKey();
-                    break;
-                }
-            }
+            Tipos[nTarea] = tipo;
+            Detalles[nTarea] = detalle;
+
+        } 
+        public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"Tarea {Tipos[nTarea]}");
+            Console.WriteLine($"{Detalles[nTarea]}");
+            Console.WriteLine("");
         }
-        public virtual void BorrarInfo(byte opcion)
+        public virtual void BorrarInfo(byte nTarea)
         {
-            Tipo        [opcion] = default;
-            Nombre      [opcion] = default;
-            Detalles    [opcion] = default;
+            Tipos[nTarea] = default;
+            Detalles[nTarea] = default;
 
             Console.WriteLine("Tarea Eliminada con exito");
             Console.ReadKey();
         }
-
-        public virtual byte SeleccionarTarea(string nombre)
+        public virtual void EditarInfo(byte nTarea)
         {
-            for (byte i = 0; i < Lista.Length; i++)
-            {
-                if (Lista[i] == nombre)
-                {
-                    return i;
-                }
-                else
-                {
-                    Console.WriteLine("Tarea no encontrada");
-                }
-            }
-            return default;
-        }
-
-        public virtual void MostrarInfo(byte opcion)
-        {
-            Console.WriteLine($"Tarea {Tipo[opcion]}");
-            Console.WriteLine($"\n{Nombre[opcion]}");
-            Console.WriteLine($"{Detalles[opcion]}");
-        }
-        public virtual void MostrarTareas()
-        {
-            for (int i = 0; i < Lista.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}. {Nombre[i]} {Tipo[i]}");
-            }
-            Console.WriteLine("");
-        }
-        public virtual void EditarTarea(byte opcion)
-        {
-            if (Lista[opcion] != null)
-            {
-                Console.WriteLine("Tarea Editada.");
-            }
+            Console.Write("Ingrese la nueva tipo de la tarea: ");
+            Tipos[nTarea] = Console.ReadLine();
+            Console.Write("Ingrese la nueva descripción de la tarea: ");
+            Detalles[nTarea] = Console.ReadLine();
         }
     }
 }
