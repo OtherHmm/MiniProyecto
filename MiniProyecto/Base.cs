@@ -6,17 +6,17 @@ namespace MiniProyecto
     {
         static void Main()
         {
-            string Nombre = default;
-            string Tipo = default;
-            string Detalle = default;
+            string Nombre   = default;
+            string Tipo     = default;
+            string Detalle  = default;
 
-            bool Salir = false;
-            bool Cancelar = false;
+            bool Salir      = false;
+            bool Cancelar   = false;
 
-            ToDo ToDo = new ToDo(Nombre, Tipo, Detalle);
-            ToDo_Personal TareaPersonal = new ToDo_Personal(Nombre, Tipo, Detalle);
-            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(Nombre, Tipo, Detalle);
-            ToDo_Estudio TareaEstudio = new ToDo_Estudio(Nombre, Tipo, Detalle);
+            ToDo            ToDo            = new ToDo          (Nombre, Tipo, Detalle);
+            ToDo_Personal   TareaPersonal   = new ToDo_Personal (Nombre, Tipo, Detalle);
+            ToDo_Trabajo    TareaTrabajo    = new ToDo_Trabajo  (Nombre, Tipo, Detalle);
+            ToDo_Estudio    TareaEstudio    = new ToDo_Estudio  (Nombre, Tipo, Detalle);
 
             do
             {
@@ -39,6 +39,7 @@ namespace MiniProyecto
                     do
                     {
                         byte opcion = Convert.ToByte(Console.ReadLine());
+
                         ToDo.MostrarInfo(opcion);
 
                         Console.WriteLine("1. Editar tarea");
@@ -48,22 +49,16 @@ namespace MiniProyecto
                         switch (Convert.ToByte(Console.ReadLine()))
                         {
                             case 1:
-                                // Editar
-
-                                //insartr metodfo de busqueda
-                                /*
-                                if (tarea != null)
-                                {
-                                    Console.WriteLine("Tarea Editada.");
-                                }*/
+                                ToDo.BorrarInfo(opcion);
                                 break;
                             case 2:
-                                ToDo.BorrarInfo(Convert.ToByte(Console.ReadLine()));
+                                ToDo.BorrarInfo(opcion);
                                 break;
                             case 3:
                                 Cancelar = true;
                                 break;
                             default:
+                                MensajeError();
                                 break;
                         }
                     } while (!Cancelar);

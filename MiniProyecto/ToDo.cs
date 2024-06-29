@@ -82,6 +82,12 @@ namespace MiniProyecto
             }
             Console.WriteLine("");
         }
-        
+        public virtual void EditarTarea(byte opcion)
+        {
+            if (Lista[opcion] != null)
+            {
+                Console.WriteLine("Tarea Editada.");
+            }
+        }
     }
 }
