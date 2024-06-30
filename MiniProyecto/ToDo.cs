@@ -6,9 +6,9 @@ namespace MiniProyecto
 {
     public class ToDo
     {
-        string[] Tipos = new string[15]; // categoria de la tarea
-        string[] Detalles = new string[15]; // descripcion de la tarea
-        string[] Fecha = new string[15]; // fecha tope
+        public static string[] Tipos = new string[15]; // categoria de la tarea
+        public static string[] Detalles = new string[15]; // descripcion de la tarea
+        public static string[] Fecha = new string[15]; // fecha tope
 
         // Constructor
 
@@ -51,6 +51,32 @@ namespace MiniProyecto
             Detalles[nTarea - 1] = Console.ReadLine();
             Console.Write("Ingrese la nueva fecha de la tarea: ");
             Fecha[nTarea - 1] = Console.ReadLine();
+        }
+        public static string ObtenerFecha(int indice)
+        {
+            return Fecha[indice];
+        }
+
+        public static void ActualizarFecha(int indice, string nuevaFecha)
+        {
+            Fecha[indice] = nuevaFecha;
+        }
+
+        public static void ActualizarTarea(int indice, string tipo, string detalle, string fecha)
+        {
+            Tipos[indice] = tipo;
+            Detalles[indice] = detalle;
+            Fecha[indice] = fecha;
+        }
+
+        public static string ObtenerTipo(int indice)
+        {
+            return Tipos[indice];
+        }
+
+        public static string ObtenerDetalle(int indice)
+        {
+            return Detalles[indice];
         }
     }
 }

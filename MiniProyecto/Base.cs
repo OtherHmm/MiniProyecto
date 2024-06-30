@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace MiniProyecto
@@ -18,7 +20,7 @@ namespace MiniProyecto
             ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default, default);
             ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default, default);
             ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default, default);
-
+            List<(int Indice, DateTime Fecha, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, DateTime, string, string, string)>();
             do
             {
                 try
@@ -92,7 +94,35 @@ namespace MiniProyecto
                             } while (!Cancelar);
                             break;
                         case 2:
-                            // metodo de ordenacion
+                            OrdenarTareasPorFecha();
+                            
+                              
+
+                               for (int i = 0; i < ContadorTareas; i++)
+                                {
+                                    if (!string.IsNullOrEmpty(Tareas[i]))
+                                    {
+                                        DateTime fecha;
+                                        string fechaStr = ToDo.ObtenerFecha(i);
+                                        if (DateTime.TryParse(fechaStr, out fecha))
+                                        {
+                                            listaTareas.Add((i, fecha, Tareas[i], ToDo.ObtenerTipo(i), ToDo.ObtenerDetalle(i)));
+                                        }
+                                    }
+                                }
+
+                                listaTareas = listaTareas.OrderBy(t => t.Fecha).ToList();
+
+                              
+                                for (int i = 0; i < listaTareas.Count; i++)
+                                {
+                                    Tareas[i] = listaTareas[i].Nombre;
+                                    ToDo.ActualizarTarea(i, listaTareas[i].Tipo, listaTareas[i].Detalle, listaTareas[i].Fecha.ToString("yyyy-MM-dd"));
+                                }
+
+                                Console.WriteLine("Tareas ordenadas por fecha con éxito.");
+                                Console.ReadKey();
+                            
                             break;
                         case 3:
                             do
@@ -235,6 +265,34 @@ namespace MiniProyecto
                     Console.WriteLine("");
                 }
             }
+        }
+        public static void OrdenarTareasPorFecha()
+        {
+            
+            List<(int Indice, DateTime Fecha, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, DateTime, string, string, string)>();
+
+            for (int i = 0; i < ContadorTareas; i++)
+            {
+                if (!string.IsNullOrEmpty(Tareas[i]))
+                {
+                    DateTime fecha;
+                    string fechaStr = ToDo.ObtenerFecha(i);
+                    if (DateTime.TryParse(fechaStr, out fecha))
+                    {
+                        listaTareas.Add((i, fecha, Tareas[i], ToDo.ObtenerTipo(i), ToDo.ObtenerDetalle(i)));
+                    }
+                }
+            }
+
+            listaTareas = listaTareas.OrderBy(t => t.Fecha).ToList();
+            for (int i = 0; i < listaTareas.Count; i++)
+            {
+                Tareas[i] = listaTareas[i].Nombre;
+                ToDo.ActualizarTarea(i, listaTareas[i].Tipo, listaTareas[i].Detalle, listaTareas[i].Fecha.ToString("yyyy-MM-dd"));
+            }
+
+            Console.WriteLine("Tareas ordenadas por fecha con éxito.");
+            Console.ReadKey();
         }
     }
 }
