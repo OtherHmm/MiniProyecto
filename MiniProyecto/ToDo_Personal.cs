@@ -19,11 +19,13 @@ namespace MiniProyecto
         }
         public void PreguntarInfoPersonal()
         {
-            Console.WriteLine("Cual es la prioridad de tu tarea?");
-            Console.WriteLine("1. Alta");
-            Console.WriteLine("2. Intermedia");
-            Console.WriteLine("3. Baja");
-
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            Console.WriteLine("|       Cual es la prioridad de tu tarea?         |");
+            Console.WriteLine("--------------------------------------------------|");
+            Console.WriteLine("|1. Alta                                          |");
+            Console.WriteLine("|                 2. Intermedia                   |");
+            Console.WriteLine("|                                   3. Baja       |");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
             prioridad = Convert.ToByte(Console.ReadLine());
         }
     }

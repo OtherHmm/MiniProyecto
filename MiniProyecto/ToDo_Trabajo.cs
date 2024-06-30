@@ -17,9 +17,12 @@ namespace MiniProyecto
 
         public void PreguntarInfoTrabajo()
         {
-            Console.WriteLine("Su tarea pendiente es para oficina (proyecto) o cliente?");
-            Console.WriteLine("1. Proyecto de oficina");
-            Console.WriteLine("2. Cliente");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            Console.WriteLine("| Su tarea pendiente es para oficina (proyecto) o cliente?|");
+            Console.WriteLine("----------------------------------------------------------|");
+            Console.WriteLine("|1. Proyecto de oficina                                   |");
+            Console.WriteLine("|                             2. Cliente                  |");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
             trabajoTarea = Convert.ToByte(Console.ReadLine());
         }
     }

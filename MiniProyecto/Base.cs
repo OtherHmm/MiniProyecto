@@ -25,8 +25,11 @@ namespace MiniProyecto
             {
                 try
                 {
-                    Console.WriteLine("------------------- ¡Bienvenido! ------------------");
-
+                    Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
+                    Console.WriteLine("|     -                                           -      |");
+                    Console.WriteLine("*  -    -   .*.*.*.   ¡Bienvenido!  .*.*.*.    -     -   *");
+                    Console.WriteLine("|-        -                                  -          -|");
+                    Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
                     // lista de tareas
 
                     if (Confirmar() == true)
@@ -35,10 +38,10 @@ namespace MiniProyecto
                     }
 
                     // menú de opciones
-                    Console.WriteLine("---------------------------------------------------");
-                    Console.WriteLine("  1. Agregar Tarea                 3. Seleccionar");
-                    Console.WriteLine("  2. Ordenar Tareas                0. Salir      ");
-                    Console.WriteLine("---------------------------------------------------");
+                    Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"); 
+                    Console.WriteLine("|  1. Agregar Tarea                 3. Seleccionar |");
+                    Console.WriteLine("|  2. Ordenar Tareas                0. Salir       |");
+                    Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 
                     byte opc = Convert.ToByte(Console.ReadLine());
 
@@ -54,14 +57,14 @@ namespace MiniProyecto
                                     Console.WriteLine("La lista de tareas está llena.");
                                     break;
                                 }
-                                Console.WriteLine("---------------------------------------");
-                                Console.WriteLine("            Agregar Tarea              ");
-                                Console.WriteLine("---------------------------------------");
-                                Console.WriteLine("      Seleccione una categoria:        ");
-                                Console.WriteLine("                                       ");
-                                Console.WriteLine("1.Estudio   2.Trabajo   3.Personal     ");
-                                Console.WriteLine("            0.Cancelar                 ");
-                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0");
+                                Console.WriteLine("|._.-._.-.._. Agregar Tarea ._.-._.-.._.|");
+                                Console.WriteLine("*---------------------------------------*");
+                                Console.WriteLine("|      Seleccione una categoria:        |");
+                                Console.WriteLine("|                                       |");
+                                Console.WriteLine("|1.Estudio   2.Trabajo   3.Personal     |");
+                                Console.WriteLine("|            0.Cancelar                 |");
+                                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0");
 
 
                                 switch (Convert.ToByte(Console.ReadLine()))
@@ -120,7 +123,7 @@ namespace MiniProyecto
                                     ToDo.ActualizarTarea(i, listaTareas[i].Tipo, listaTareas[i].Detalle, listaTareas[i].Fecha.ToString("yyyy-MM-dd"));
                                 }
 
-                                Console.WriteLine("Tareas ordenadas por fecha con éxito.");
+                                Console.WriteLine("¡¡Tareas ordenadas por fecha con éxito!!");
                                 Console.ReadKey();
                             
                             break;
@@ -135,7 +138,7 @@ namespace MiniProyecto
 
                                 MostrarTareas();
 
-                                Console.WriteLine("Digite el numero de la tarea");
+                                Console.WriteLine("Digite el numero de la tarea  ");
                                 byte nTarea = Convert.ToByte(Console.ReadLine());
 
                                 Console.Clear();
@@ -144,10 +147,10 @@ namespace MiniProyecto
                                 Console.WriteLine();
 
                                 ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
-
-                                Console.WriteLine("1. Editar tarea      0. Volver");
-                                Console.WriteLine("2. Borrar tarea      \n       ");
-
+                                Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+                                Console.WriteLine("| 1. Editar tarea                         0. Volver|");
+                                Console.WriteLine("| 2. Borrar tarea                         \n       |");
+                                Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
                                 switch (Convert.ToByte(Console.ReadLine()))
                                 {
                                     case 1:
