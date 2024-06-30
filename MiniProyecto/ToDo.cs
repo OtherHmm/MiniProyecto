@@ -22,21 +22,19 @@ namespace MiniProyecto
 
         public virtual void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
-            Tipos[nTarea] = tipo;
-            Detalles[nTarea] = detalle;
+            Tipos[nTarea-1] = tipo;
+            Detalles[nTarea-1] = detalle;
 
         } 
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
-            Console.WriteLine("");
-            Console.WriteLine($"Tarea {Tipos[nTarea]}");
-            Console.WriteLine($"{Detalles[nTarea]}");
-            Console.WriteLine("");
+            Console.WriteLine($"\nTarea {Tipos[nTarea - 1]}");
+            Console.WriteLine($"{Detalles[nTarea - 1]}\n");
         }
         public virtual void BorrarInfo(byte nTarea)
         {
-            Tipos[nTarea] = default;
-            Detalles[nTarea] = default;
+            Tipos[nTarea - 1] = default;
+            Detalles[nTarea - 1] = default;
 
             Console.WriteLine("Tarea Eliminada con exito");
             Console.ReadKey();
@@ -44,9 +42,9 @@ namespace MiniProyecto
         public virtual void EditarInfo(byte nTarea)
         {
             Console.Write("Ingrese el nuevo tipo de la tarea: ");
-            Tipos[nTarea] = Console.ReadLine();
+            Tipos[nTarea - 1] = Console.ReadLine();
             Console.Write("Ingrese la nueva descripción de la tarea: ");
-            Detalles[nTarea] = Console.ReadLine();
+            Detalles[nTarea - 1] = Console.ReadLine();
         }
     }
 }
