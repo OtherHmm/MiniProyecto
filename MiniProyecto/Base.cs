@@ -134,8 +134,16 @@ namespace MiniProyecto
                             
                             break;
                         case 3:
+                            if (ContadorTareas == 0)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("No podes seleccionar tareas inexistentes.");
+                                Console.WriteLine("");
+                                break;
+                            }
                             do
                             {
+                                
                                 if (Confirmar() == false)
                                 {
                                     Cancelar = true;
