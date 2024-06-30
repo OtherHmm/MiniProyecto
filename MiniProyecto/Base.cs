@@ -110,7 +110,7 @@ namespace MiniProyecto
                                         ToDo.EditarInfo(nTarea);
                                         break;
                                     case 2:
-                                        Tareas[nTarea] = default;
+                                        Tareas[nTarea - 1] = default;
                                         ToDo.BorrarInfo(nTarea);
                                         break;
                                     case 3:
