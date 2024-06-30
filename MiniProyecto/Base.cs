@@ -13,11 +13,11 @@ namespace MiniProyecto
             bool Salir = false;
             bool Cancelar = false;
 
-            ToDo ToDo = new ToDo(default, default, default);
+            ToDo ToDo = new ToDo(default, default, default, default);
 
-            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default);
-            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default);
-            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default);
+            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default);
+            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default);
+            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default);
 
             do
             {
@@ -64,18 +64,18 @@ namespace MiniProyecto
                                 switch (Convert.ToByte(Console.ReadLine()))
                                 {
                                     case 1:
-                                        AñadirTarea(out string nombre, out string detalle, out byte indice);
-                                        TareaEstudio.AgregarInfo("Estudio", detalle, indice);
+                                        AñadirTarea(out string nombre, out string detalle, out byte indice, out string fecha);
+                                        TareaEstudio.AgregarInfo("Estudio", detalle, indice, fecha);
 
                                         break;
                                     case 2:
-                                        AñadirTarea(out nombre, out detalle, out indice);
-                                        TareaTrabajo.AgregarInfo("Trabajo", detalle, indice);
+                                        AñadirTarea(out nombre, out detalle, out indice, out fecha);
+                                        TareaTrabajo.AgregarInfo("Trabajo", detalle, indice, fecha);
 
                                         break;
                                     case 3:
-                                        AñadirTarea(out nombre, out detalle, out indice);
-                                        TareaPersonal.AgregarInfo("Personal", detalle, indice);
+                                        AñadirTarea(out nombre, out detalle, out indice, out fecha);
+                                        TareaPersonal.AgregarInfo("Personal", detalle, indice, fecha);
 
                                         break;
                                     case 0:
@@ -184,13 +184,16 @@ namespace MiniProyecto
 
         // Metodos
 
-        public static void AñadirTarea(out string nombre, out string detalle, out byte Indice) // utilizado al agregar tareas
+        public static void AñadirTarea(out string nombre, out string detalle, out byte Indice, out string fecha) // utilizado al agregar tareas
         {
             Console.WriteLine("Digite el nombre");
             nombre = Console.ReadLine();
 
             Console.WriteLine("Digite la descripcion");
             detalle = Console.ReadLine();
+            
+            Console.WriteLine("Digite la fecha limite");
+            fecha = Console.ReadLine();
 
             Tareas[ContadorTareas] = nombre;
 
