@@ -28,7 +28,13 @@ namespace MiniProyecto
                     // lista de tareas
 
                     Console.Clear();
-                    MostrarTareas();
+
+                    if (Confirmar()== true)
+                        {
+                        MostrarTareas();
+
+                    }
+
 
                     // menú de opciones
                     Console.WriteLine("---------------------------------------------------");
@@ -72,7 +78,7 @@ namespace MiniProyecto
                                         TareaPersonal.AgregarInfo("Personal", detalle, indice);
 
                                         break;
-                                    case 4:
+                                    case 0:
                                         Cancelar = true;
                                         break;
                                     default:
@@ -88,6 +94,13 @@ namespace MiniProyecto
                             do
                             {
                                 Console.Clear();
+
+                                if (Confirmar() == false)
+                                {
+                                    Cancelar = true;
+                                    break;
+                                }
+
                                 MostrarTareas();
 
                                 Console.WriteLine("Digite el numero de la tarea");
@@ -99,21 +112,21 @@ namespace MiniProyecto
 
                                 ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
 
-                                Console.WriteLine("1. Editar tarea      3. Volver");
+                                Console.WriteLine("1. Editar tarea      0. Volver");
                                 Console.WriteLine("2. Borrar tarea      \n       ");
 
                                 switch (Convert.ToByte(Console.ReadLine()))
                                 {
                                     case 1:
                                         Console.Write("Ingrese el nuevo título de la tarea: ");
-                                        Tareas[nTarea - 1 ] = Console.ReadLine();
+                                        Tareas[nTarea - 1] = Console.ReadLine();
                                         ToDo.EditarInfo(nTarea);
                                         break;
                                     case 2:
                                         Tareas[nTarea - 1] = default;
                                         ToDo.BorrarInfo(nTarea);
                                         break;
-                                    case 3:
+                                    case 0:
                                         Cancelar = true;
                                         break;
                                     default:
@@ -123,7 +136,7 @@ namespace MiniProyecto
                             } while (!Cancelar);
                             break;
                         case 0:
-                            Console.Clear ();
+                            Console.Clear();
                             Salir = true;
                             break;
                         default:
@@ -194,27 +207,33 @@ namespace MiniProyecto
             Console.WriteLine("Error! opcion invalida");
             Console.ReadKey();
         }
+        public static bool Confirmar()
+        {
+            for (int i = 0; i < Tareas.Length; i++)
+            {
+                if (Tareas[i] != default)
+                {
+                    return true;
+                }
+            }
+            Console.WriteLine("\nNo hay tareas :/ ?\n");
+
+            return false;
+        }
         public static void MostrarTareas()
         {
-            bool hayTareas = false;
+            Console.WriteLine("Lista de tareas\n");
 
             for (int i = 0; i < Tareas.Length; i++)
             {
                 if (Tareas[i] != default)
                 {
-                    Console.WriteLine("Lista de tareas\n");
-
-                    hayTareas = true;
                     Console.WriteLine($"{i + 1}. {Tareas[i]}");
                 }
-                if (hayTareas == true && Tareas[i] == default)
+                if (Tareas[i] == default)
                 {
                     Console.WriteLine("");
                 }
-            }
-            if (hayTareas == false)
-            {
-                Console.WriteLine("\nNo hay tareas :/ ?\n");
             }
         }
     }
