@@ -23,9 +23,7 @@ namespace MiniProyecto
             {
                 try
                 {
-                    // bienvenida
-
-                    Console.WriteLine("Lista de tareas\n");
+                    // Pon una bienvenida
 
                     // lista de tareas
 
@@ -73,31 +71,31 @@ namespace MiniProyecto
                                         AñadirTarea(out nombre, out detalle, out indice);
                                         TareaPersonal.AgregarInfo("Personal", detalle, indice);
 
-                                    break;
-                                case 4:
-                                    Cancelar = true;
-                                    break;
-                                default:
-                                    MensajeError();
-                                    return;
-                            }
-                        } while (!Cancelar);
-                        break;
-                    case 2:
-                        // metodo de ordenacion
-                        break;
-                    case 3:
-                        do
-                        {
-                            Console.Clear();
-                            MostrarTareas();
+                                        break;
+                                    case 4:
+                                        Cancelar = true;
+                                        break;
+                                    default:
+                                        MensajeError();
+                                        return;
+                                }
+                            } while (!Cancelar);
+                            break;
+                        case 2:
+                            // metodo de ordenacion
+                            break;
+                        case 3:
+                            do
+                            {
+                                Console.Clear();
+                                MostrarTareas();
 
                                 Console.WriteLine("Digite el numero de la tarea");
                                 byte nTarea = Convert.ToByte(Console.ReadLine());
 
                                 Console.Clear();
-
-                                Console.WriteLine(Tareas[nTarea]);
+                                Console.WriteLine("");
+                                Console.WriteLine(Tareas[nTarea - 1]);
 
                                 ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
 
@@ -108,7 +106,7 @@ namespace MiniProyecto
                                 {
                                     case 1:
                                         Console.Write("Ingrese el nuevo título de la tarea: ");
-                                        Tareas[nTarea] = Console.ReadLine();
+                                        Tareas[nTarea - 1 ] = Console.ReadLine();
                                         ToDo.EditarInfo(nTarea);
                                         break;
                                     case 2:
@@ -125,6 +123,7 @@ namespace MiniProyecto
                             } while (!Cancelar);
                             break;
                         case 0:
+                            Console.Clear ();
                             Salir = true;
                             break;
                         default:
@@ -132,35 +131,6 @@ namespace MiniProyecto
                             break;
                     }
                 }
-                            switch (Convert.ToByte(Console.ReadLine()))
-                            {
-                                case 1:
-                                    Console.Write("Ingrese el nuevo título de la tarea: ");
-                                    Tareas[nTarea] = Console.ReadLine();
-                                    ToDo.EditarInfo(nTarea);
-                                    break;
-                                case 2:
-                                    Tareas[nTarea] = default;
-                                    ToDo.BorrarInfo(nTarea);
-                                    break;
-                                case 3:
-                                    Console.Clear();
-                                    Cancelar = true;
-                                    break;
-                                default:
-                                    MensajeError();
-                                    break;
-                            }
-                        } while (!Cancelar);
-                        break;
-                    case 0:
-                        Salir = true;
-                        break;
-                    default:
-                        MensajeError();
-                        break;
-                }
-             }
                 catch (IndexOutOfRangeException)
                 {
                     Console.Clear();
@@ -197,7 +167,6 @@ namespace MiniProyecto
                     Console.WriteLine("Error, intentelo de nuevo");
                 }
             } while (!Salir);
-
         }
 
         // Metodos
@@ -217,7 +186,7 @@ namespace MiniProyecto
             ContadorTareas++;
 
             Console.WriteLine("Tarea agregada exitosamente.");
-            
+
         }
         public static void MensajeError()
         {
@@ -231,8 +200,10 @@ namespace MiniProyecto
 
             for (int i = 0; i < Tareas.Length; i++)
             {
-                if (Tareas[i] != default) 
+                if (Tareas[i] != default)
                 {
+                    Console.WriteLine("Lista de tareas\n");
+
                     hayTareas = true;
                     Console.WriteLine($"{i + 1}. {Tareas[i]}");
                 }
@@ -241,9 +212,9 @@ namespace MiniProyecto
                     Console.WriteLine("");
                 }
             }
-            if (hayTareas == false) 
-            { 
-            Console.WriteLine("\nNo hay tareas :/ ?\n");
+            if (hayTareas == false)
+            {
+                Console.WriteLine("\nNo hay tareas :/ ?\n");
             }
         }
     }
