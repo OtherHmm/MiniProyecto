@@ -15,9 +15,9 @@ namespace MiniProyecto
 
             ToDo ToDo = new ToDo(default, default, default, default);
 
-            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default);
-            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default);
-            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default);
+            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default, default);
+            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default, default);
+            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default, default);
 
             do
             {
@@ -26,7 +26,7 @@ namespace MiniProyecto
                     // Pon una bienvenida
 
                     // lista de tareas
-
+                   
                     Console.Clear();
 
                     if (Confirmar()== true)
@@ -38,8 +38,9 @@ namespace MiniProyecto
 
                     // menú de opciones
                     Console.WriteLine("---------------------------------------------------");
-                    Console.WriteLine("1. Agregar Tarea     3. Seleccionar");
-                    Console.WriteLine("2. Ordenar Tareas    0. Salir      ");
+                    Console.WriteLine("  1. Agregar Tarea                 3. Seleccionar");
+                    Console.WriteLine("  2. Ordenar Tareas                0. Salir      ");
+                    Console.WriteLine("---------------------------------------------------");
 
                     byte opc = Convert.ToByte(Console.ReadLine());
 
@@ -55,25 +56,32 @@ namespace MiniProyecto
                                     Console.WriteLine("La lista de tareas está llena.");
                                     break;
                                 }
-
-                                Console.WriteLine("Agregar Tarea\n");
-                                Console.WriteLine("Seleccione una categoria: \n 1. Estudio, 2. Trabajo, 3. Personal");
-                                Console.WriteLine("     0. Cancelar");
+                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("            Agregar Tarea              ");
+                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("      Seleccione una categoria:");
+                                Console.WriteLine("");
+                                Console.WriteLine("1.Estudio   2.Trabajo   3.Personal");
+                                Console.WriteLine("            0.Cancelar");
+                                Console.WriteLine("---------------------------------------");
 
 
                                 switch (Convert.ToByte(Console.ReadLine()))
                                 {
                                     case 1:
+                                        TareaEstudio.PreguntarInfo();
                                         AñadirTarea(out string nombre, out string detalle, out byte indice, out string fecha);
                                         TareaEstudio.AgregarInfo("Estudio", detalle, indice, fecha);
-
+                                        
                                         break;
                                     case 2:
+                                        TareaTrabajo.PreguntarInfoTrabajo();
                                         AñadirTarea(out nombre, out detalle, out indice, out fecha);
                                         TareaTrabajo.AgregarInfo("Trabajo", detalle, indice, fecha);
 
                                         break;
                                     case 3:
+                                        TareaPersonal.PreguntarInfoPersonal();
                                         AñadirTarea(out nombre, out detalle, out indice, out fecha);
                                         TareaPersonal.AgregarInfo("Personal", detalle, indice, fecha);
 
@@ -109,6 +117,7 @@ namespace MiniProyecto
                                 Console.Clear();
                                 Console.WriteLine("");
                                 Console.WriteLine(Tareas[nTarea - 1]);
+                                Console.WriteLine();
 
                                 ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
 
@@ -219,13 +228,16 @@ namespace MiniProyecto
                     return true;
                 }
             }
+            Console.WriteLine("------------------- ¡Bienvenido! ------------------");
             Console.WriteLine("\nNo hay tareas :/ ?\n");
 
             return false;
         }
         public static void MostrarTareas()
         {
+            Console.WriteLine("------------------- ¡Bienvenido! ------------------");
             Console.WriteLine("Lista de tareas\n");
+            
 
             for (int i = 0; i < Tareas.Length; i++)
             {

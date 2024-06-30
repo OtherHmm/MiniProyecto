@@ -25,7 +25,8 @@ namespace MiniProyecto
         {
             Tipos[nTarea-1] = tipo;
             Detalles[nTarea-1] = detalle;
-            Fecha[nTarea] = fecha;
+            Fecha[nTarea-1] = fecha;
+            
         }
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
