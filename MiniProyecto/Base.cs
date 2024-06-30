@@ -248,13 +248,13 @@ namespace MiniProyecto
             ContadorTareas++;
 
             Console.WriteLine("Tarea agregada exitosamente.");
-
+            Console.ReadKey();
         }
         public static void MensajeError()
         {
             Console.Clear();
             Console.WriteLine("Error! opcion invalida");
-            Console.ReadKey();
+           
         }
         public static bool Confirmar()
         {
