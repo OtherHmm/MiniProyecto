@@ -40,7 +40,7 @@ namespace MiniProyecto
             Detalles[nTarea - 1] = default;
             Fecha[nTarea - 1] = default;
 
-            Console.WriteLine("Tarea Eliminada con exito");
+            Console.WriteLine("¿Tarea Eliminada con exito!");
             Console.ReadKey();
         }
         public virtual void EditarInfo(byte nTarea)
