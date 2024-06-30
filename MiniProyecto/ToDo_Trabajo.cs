@@ -20,7 +20,7 @@ namespace MiniProyecto
             Console.WriteLine("Su tarea pendiente es para oficina (proyecto) o cliente?");
             Console.WriteLine("1. Proyecto de oficina");
             Console.WriteLine("2. Cliente");
-            trabajoTarea=Convert.ToByte(Console.ReadLine());
+            trabajoTarea = Convert.ToByte(Console.ReadLine());
         }
     }
 }

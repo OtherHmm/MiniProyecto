@@ -23,18 +23,14 @@ namespace MiniProyecto
             {
                 try
                 {
-                    // Pon una bienvenida
+                    Console.WriteLine("------------------- ¡Bienvenido! ------------------");
 
                     // lista de tareas
-                   
-                    Console.Clear();
 
-                    if (Confirmar()== true)
-                        {
+                    if (Confirmar() == true)
+                    {
                         MostrarTareas();
-
                     }
-
 
                     // menú de opciones
                     Console.WriteLine("---------------------------------------------------");
@@ -59,10 +55,10 @@ namespace MiniProyecto
                                 Console.WriteLine("---------------------------------------");
                                 Console.WriteLine("            Agregar Tarea              ");
                                 Console.WriteLine("---------------------------------------");
-                                Console.WriteLine("      Seleccione una categoria:");
-                                Console.WriteLine("");
-                                Console.WriteLine("1.Estudio   2.Trabajo   3.Personal");
-                                Console.WriteLine("            0.Cancelar");
+                                Console.WriteLine("      Seleccione una categoria:        ");
+                                Console.WriteLine("                                       ");
+                                Console.WriteLine("1.Estudio   2.Trabajo   3.Personal     ");
+                                Console.WriteLine("            0.Cancelar                 ");
                                 Console.WriteLine("---------------------------------------");
 
 
@@ -72,7 +68,7 @@ namespace MiniProyecto
                                         TareaEstudio.PreguntarInfo();
                                         AñadirTarea(out string nombre, out string detalle, out byte indice, out string fecha);
                                         TareaEstudio.AgregarInfo("Estudio", detalle, indice, fecha);
-                                        
+
                                         break;
                                     case 2:
                                         TareaTrabajo.PreguntarInfoTrabajo();
@@ -101,8 +97,6 @@ namespace MiniProyecto
                         case 3:
                             do
                             {
-                                Console.Clear();
-
                                 if (Confirmar() == false)
                                 {
                                     Cancelar = true;
@@ -155,8 +149,7 @@ namespace MiniProyecto
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Error, intentelo de nuevo.");
+                    MensajeError();
                 }
                 catch (FormatException)
                 {
@@ -165,28 +158,23 @@ namespace MiniProyecto
                 }
                 catch (OverflowException)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Error, intentelo de nuevo");
+                    MensajeError();
                 }
                 catch (NullReferenceException)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Error, intentelo de nuevo");
+                    MensajeError();
                 }
                 catch (StackOverflowException)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Error, intentelo de nuevo");
+                    MensajeError();
                 }
                 catch (TypeInitializationException)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Error, intentelo de nuevo");
+                    MensajeError();
                 }
                 catch (Exception)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Error, intentelo de nuevo");
+                    MensajeError();
                 }
             } while (!Salir);
         }
@@ -200,7 +188,7 @@ namespace MiniProyecto
 
             Console.WriteLine("Digite la descripcion");
             detalle = Console.ReadLine();
-            
+
             Console.WriteLine("Digite la fecha limite");
             fecha = Console.ReadLine();
 
@@ -211,7 +199,6 @@ namespace MiniProyecto
             ContadorTareas++;
 
             Console.WriteLine("Tarea agregada exitosamente.");
-
         }
         public static void MensajeError()
         {
@@ -221,23 +208,21 @@ namespace MiniProyecto
         }
         public static bool Confirmar()
         {
-            for (int i = 0; i < Tareas.Length; i++)
+            foreach (string tarea in Tareas)
             {
-                if (Tareas[i] != default)
+                if (tarea != default)
                 {
                     return true;
                 }
             }
-            Console.WriteLine("------------------- ¡Bienvenido! ------------------");
             Console.WriteLine("\nNo hay tareas :/ ?\n");
-
             return false;
         }
         public static void MostrarTareas()
         {
-            Console.WriteLine("------------------- ¡Bienvenido! ------------------");
+            Console.Clear();
+
             Console.WriteLine("Lista de tareas\n");
-            
 
             for (int i = 0; i < Tareas.Length; i++)
             {

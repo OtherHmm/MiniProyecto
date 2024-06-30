@@ -18,7 +18,7 @@ namespace MiniProyecto
         public void PreguntarInfo()
         {
             Console.WriteLine("De que materia es tu tarea?");
-            materia=Console.ReadLine();
+            materia = Console.ReadLine();
         }
     }
 }

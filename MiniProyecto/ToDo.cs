@@ -6,8 +6,8 @@ namespace MiniProyecto
 {
     public class ToDo
     {
-         string[] Tipos = new string[15]; // categoria de la tarea
-         string[] Detalles = new string[15]; // descripcion de la tarea
+        string[] Tipos = new string[15]; // categoria de la tarea
+        string[] Detalles = new string[15]; // descripcion de la tarea
         string[] Fecha = new string[15]; // fecha tope
 
         // Constructor
@@ -23,10 +23,10 @@ namespace MiniProyecto
 
         public virtual void AgregarInfo(string tipo, string detalle, byte nTarea, string fecha)
         {
-            Tipos[nTarea-1] = tipo;
-            Detalles[nTarea-1] = detalle;
-            Fecha[nTarea-1] = fecha;
-            
+            Tipos[nTarea - 1] = tipo;
+            Detalles[nTarea - 1] = detalle;
+            Fecha[nTarea - 1] = fecha;
+
         }
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
@@ -38,7 +38,7 @@ namespace MiniProyecto
         {
             Tipos[nTarea - 1] = default;
             Detalles[nTarea - 1] = default;
-            Fecha[nTarea-1] = default;
+            Fecha[nTarea - 1] = default;
 
             Console.WriteLine("Tarea Eliminada con exito");
             Console.ReadKey();
