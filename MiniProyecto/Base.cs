@@ -96,6 +96,13 @@ namespace MiniProyecto
                             } while (!Cancelar);
                             break;
                         case 2:
+                            if (ContadorTareas == 0)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("No podes ordenar tareas inexistentes.");
+                                Console.WriteLine("");
+                                break;
+                            }
                             OrdenarTareasPorFecha();
                             
                               
@@ -142,8 +149,10 @@ namespace MiniProyecto
 
                                 Console.Clear();
                                 Console.WriteLine("");
-                                Console.WriteLine(Tareas[nTarea - 1]);
-                                Console.WriteLine();
+                                
+                                Console.WriteLine(Tareas[nTarea]);
+                                Console.WriteLine(ToDo.Fecha[nTarea]);
+                                Console.WriteLine(ToDo.Tipos[nTarea]);
 
                                 ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
                                 Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
@@ -231,7 +240,7 @@ namespace MiniProyecto
             ContadorTareas++;
 
             Console.WriteLine("Tarea agregada exitosamente.");
-            Console.ReadKey();
+
         }
         public static void MensajeError()
         {
@@ -271,7 +280,7 @@ namespace MiniProyecto
         }
         public static void OrdenarTareasPorFecha()
         {
-            
+         
             List<(int Indice, DateTime Fecha, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, DateTime, string, string, string)>();
 
             for (int i = 0; i < ContadorTareas; i++)

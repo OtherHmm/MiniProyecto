@@ -12,27 +12,28 @@ namespace MiniProyecto
 
         // Constructor
 
-        public ToDo(string tipo, string detalle, byte nTarea, string fecha)
-        {
-            Tipos[nTarea] = tipo;
-            Detalles[nTarea] = detalle;
-            Fecha[nTarea] = fecha;
+     public ToDo(string tipo, string detalle, byte nTarea, string fecha)
+       {
+           Tipos[nTarea] = tipo;
+           Detalles[nTarea] = detalle;
+           Fecha[nTarea] = fecha;
         }
 
         // Métodos 
 
         public virtual void AgregarInfo(string tipo, string detalle, byte nTarea, string fecha)
         {
-            Tipos[nTarea - 1] = tipo;
-            Detalles[nTarea - 1] = detalle;
-            Fecha[nTarea - 1] = fecha;
+            Tipos[nTarea-1] = tipo;
+            Detalles[nTarea-1] = detalle;
+            Fecha[nTarea-1] = fecha;
 
         }
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
-            Console.WriteLine($"\nTarea {Tipos}");
-            Console.WriteLine($"{Detalles}\n");
-            Console.WriteLine($"Fecha limite {Fecha}\n");
+            Console.WriteLine($"\nTarea {Tipos[nTarea-1]}");
+            Console.WriteLine($"{Detalles[nTarea-1]}\n");
+            Console.WriteLine($"Fecha limite {Fecha[nTarea-1]}\n");
+            
         }
         public virtual void BorrarInfo(byte nTarea)
         {
