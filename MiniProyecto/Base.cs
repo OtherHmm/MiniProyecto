@@ -25,7 +25,7 @@ namespace MiniProyecto
             {
                 try
                 {
-                    Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
+                    Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0--- 0");
                     Console.WriteLine("|     -                                           -      |");
                     Console.WriteLine("*  -    -   .*.*.*.   ¡Bienvenido!  .*.*.*.    -     -   *");
                     Console.WriteLine("|-        -                                  -          -|");
