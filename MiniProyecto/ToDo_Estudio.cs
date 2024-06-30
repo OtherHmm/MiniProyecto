@@ -5,14 +5,14 @@ namespace MiniProyecto
     public class ToDo_Estudio : ToDo
     {
         string materia;
-        public ToDo_Estudio(string tipo, string detalle, byte nTarea, string fecha, string materia) : base(tipo, detalle, nTarea, fecha)
+        public ToDo_Estudio(string tipo, string detalle, byte nTarea, string materia) : base(tipo, detalle, nTarea)
         {
             this.materia = materia;
         }
 
-        public override void AgregarInfo(string tipo, string detalle, byte nTarea, string fecha)
+        public override void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
-            base.AgregarInfo(tipo, detalle, nTarea, fecha);
+            base.AgregarInfo(tipo, detalle, nTarea);
         }
 
         public void PreguntarInfo()

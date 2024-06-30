@@ -9,13 +9,13 @@ namespace MiniProyecto
     internal class ToDo_Personal : ToDo
     {
         byte prioridad;
-        public ToDo_Personal(string tipo, string detalle, byte nTarea, string fecha, byte prioridad) : base(tipo, detalle, nTarea, fecha)
+        public ToDo_Personal(string tipo, string detalle, byte nTarea, byte prioridad) : base(tipo, detalle, nTarea)
         {
             this.prioridad = prioridad;
         }
-        public override void AgregarInfo(string tipo, string detalle, byte nTarea, string fecha)
+        public override void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
-            base.AgregarInfo(tipo, detalle, nTarea, fecha);
+            base.AgregarInfo(tipo, detalle, nTarea);
         }
         public void PreguntarInfoPersonal()
         {

@@ -14,12 +14,12 @@ namespace MiniProyecto
             bool Salir = false;
             bool Cancelar = false;
 
-            ToDo ToDo = new ToDo(default, default, default, default);
+            ToDo ToDo = new ToDo(default, default, default);
 
-            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default, default);
-            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default, default);
-            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default, default);
-            List<(int Indice, DateTime Fecha, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, DateTime, string, string, string)>();
+            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default);
+            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default);
+            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default);
+            List<(int Indice, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, string, string, string)>();
             do
             {
                 try
@@ -38,8 +38,8 @@ namespace MiniProyecto
 
                     // menú de opciones
                     Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"); 
-                    Console.WriteLine("|  1. Agregar Tarea                 3. Seleccionar |");
-                    Console.WriteLine("|  2. Ordenar Tareas                0. Salir       |");
+                    Console.WriteLine("|  1. Agregar Tarea                 2. Seleccionar |");
+                    Console.WriteLine("|                                   0. Salir       |");
                     Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 
                     byte opc = Convert.ToByte(Console.ReadLine());
@@ -70,20 +70,20 @@ namespace MiniProyecto
                                 {
                                     case 1:
                                         TareaEstudio.PreguntarInfo();
-                                        AñadirTarea(out string nombre, out string detalle, out byte indice, out string fecha);
-                                        TareaEstudio.AgregarInfo("Estudio", detalle, indice, fecha);
+                                        AñadirTarea(out string nombre, out string detalle, out byte indice);
+                                        TareaEstudio.AgregarInfo("Estudio", detalle, indice);
 
                                         break;
                                     case 2:
                                         TareaTrabajo.PreguntarInfoTrabajo();
-                                        AñadirTarea(out nombre, out detalle, out indice, out fecha);
-                                        TareaTrabajo.AgregarInfo("Trabajo", detalle, indice, fecha);
+                                        AñadirTarea(out nombre, out detalle, out indice);
+                                        TareaTrabajo.AgregarInfo("Trabajo", detalle, indice);
 
                                         break;
                                     case 3:
                                         TareaPersonal.PreguntarInfoPersonal();
-                                        AñadirTarea(out nombre, out detalle, out indice, out fecha);
-                                        TareaPersonal.AgregarInfo("Personal", detalle, indice, fecha);
+                                        AñadirTarea(out nombre, out detalle, out indice);
+                                        TareaPersonal.AgregarInfo("Personal", detalle, indice);
 
                                         break;
                                     case 0:
@@ -96,44 +96,6 @@ namespace MiniProyecto
                             } while (!Cancelar);
                             break;
                         case 2:
-                            if (ContadorTareas == 0)
-                            {
-                                Console.Clear();
-                                Console.WriteLine("No podes ordenar tareas inexistentes.");
-                                Console.WriteLine("");
-                                break;
-                            }
-                            OrdenarTareasPorFecha();
-                            
-                              
-
-                               for (int i = 0; i < ContadorTareas; i++)
-                                {
-                                    if (!string.IsNullOrEmpty(Tareas[i]))
-                                    {
-                                        DateTime fecha;
-                                        string fechaStr = ToDo.ObtenerFecha(i);
-                                        if (DateTime.TryParse(fechaStr, out fecha))
-                                        {
-                                            listaTareas.Add((i, fecha, Tareas[i], ToDo.ObtenerTipo(i), ToDo.ObtenerDetalle(i)));
-                                        }
-                                    }
-                                }
-
-                                listaTareas = listaTareas.OrderBy(t => t.Fecha).ToList();
-
-                              
-                                for (int i = 0; i < listaTareas.Count; i++)
-                                {
-                                    Tareas[i] = listaTareas[i].Nombre;
-                                    ToDo.ActualizarTarea(i, listaTareas[i].Tipo, listaTareas[i].Detalle, listaTareas[i].Fecha.ToString("yyyy-MM-dd"));
-                                }
-
-                                Console.WriteLine("¡¡Tareas ordenadas por fecha con éxito!!");
-                                Console.ReadKey();
-                            
-                            break;
-                        case 3:
                             if (ContadorTareas == 0)
                             {
                                 Console.Clear();
@@ -159,7 +121,6 @@ namespace MiniProyecto
                                 Console.WriteLine("");
                                 
                                 Console.WriteLine(Tareas[nTarea]);
-                                Console.WriteLine(ToDo.Fecha[nTarea]);
                                 Console.WriteLine(ToDo.Tipos[nTarea]);
 
                                 ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
@@ -177,6 +138,7 @@ namespace MiniProyecto
                                     case 2:
                                         Tareas[nTarea - 1] = default;
                                         ToDo.BorrarInfo(nTarea);
+                                        ContadorTareas -= 1;
                                         break;
                                     case 0:
                                         Cancelar = true;
@@ -230,16 +192,13 @@ namespace MiniProyecto
 
         // Metodos
 
-        public static void AñadirTarea(out string nombre, out string detalle, out byte Indice, out string fecha) // utilizado al agregar tareas
+        public static void AñadirTarea(out string nombre, out string detalle, out byte Indice) // utilizado al agregar tareas
         {
             Console.WriteLine("Digite el nombre");
             nombre = Console.ReadLine();
 
             Console.WriteLine("Digite la descripcion");
             detalle = Console.ReadLine();
-
-            Console.WriteLine("Digite la fecha limite");
-            fecha = Console.ReadLine();
 
             Tareas[ContadorTareas] = nombre;
 
@@ -280,39 +239,9 @@ namespace MiniProyecto
                 {
                     Console.WriteLine($"{i + 1}. {Tareas[i]}");
                 }
-                if (Tareas[i] == default)
-                {
-                    Console.WriteLine("");
-                }
+               
             }
         }
-        public static void OrdenarTareasPorFecha()
-        {
-         
-            List<(int Indice, DateTime Fecha, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, DateTime, string, string, string)>();
-
-            for (int i = 0; i < ContadorTareas; i++)
-            {
-                if (!string.IsNullOrEmpty(Tareas[i]))
-                {
-                    DateTime fecha;
-                    string fechaStr = ToDo.ObtenerFecha(i);
-                    if (DateTime.TryParse(fechaStr, out fecha))
-                    {
-                        listaTareas.Add((i, fecha, Tareas[i], ToDo.ObtenerTipo(i), ToDo.ObtenerDetalle(i)));
-                    }
-                }
-            }
-
-            listaTareas = listaTareas.OrderBy(t => t.Fecha).ToList();
-            for (int i = 0; i < listaTareas.Count; i++)
-            {
-                Tareas[i] = listaTareas[i].Nombre;
-                ToDo.ActualizarTarea(i, listaTareas[i].Tipo, listaTareas[i].Detalle, listaTareas[i].Fecha.ToString("yyyy-MM-dd"));
-            }
-
-            Console.Clear();
-            
-        }
+      
     }
 }

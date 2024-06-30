@@ -5,14 +5,14 @@ namespace MiniProyecto
     public class ToDo_Trabajo : ToDo
     {
         byte trabajoTarea;
-        public ToDo_Trabajo(string tipo, string detalle, byte nTarea, string fecha, byte trabajoTarea) : base(tipo, detalle, nTarea, fecha)
+        public ToDo_Trabajo(string tipo, string detalle, byte nTarea, byte trabajoTarea) : base(tipo, detalle, nTarea)
         {
             this.trabajoTarea = trabajoTarea;
         }
 
-        public override void AgregarInfo(string tipo, string detalle, byte nTarea, string fecha)
+        public override void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
-            base.AgregarInfo(tipo, detalle, nTarea, fecha);
+            base.AgregarInfo(tipo, detalle, nTarea);
         }
 
         public void PreguntarInfoTrabajo()
