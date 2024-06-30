@@ -231,6 +231,7 @@ namespace MiniProyecto
             ContadorTareas++;
 
             Console.WriteLine("Tarea agregada exitosamente.");
+            Console.ReadKey();
         }
         public static void MensajeError()
         {
@@ -293,8 +294,8 @@ namespace MiniProyecto
                 ToDo.ActualizarTarea(i, listaTareas[i].Tipo, listaTareas[i].Detalle, listaTareas[i].Fecha.ToString("yyyy-MM-dd"));
             }
 
-            Console.WriteLine("Tareas ordenadas por fecha con éxito.");
-            Console.ReadKey();
+            Console.Clear();
+            
         }
     }
 }

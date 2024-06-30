@@ -30,9 +30,9 @@ namespace MiniProyecto
         }
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
-            Console.WriteLine($"\nTarea {Tipos[nTarea - 1]}");
-            Console.WriteLine($"{Detalles[nTarea - 1]}\n");
-            Console.WriteLine($"Fecha limite {Fecha[nTarea - 1]}\n");
+            Console.WriteLine($"\nTarea {Tipos}");
+            Console.WriteLine($"{Detalles}\n");
+            Console.WriteLine($"Fecha limite {Fecha}\n");
         }
         public virtual void BorrarInfo(byte nTarea)
         {
@@ -40,8 +40,9 @@ namespace MiniProyecto
             Detalles[nTarea - 1] = default;
             Fecha[nTarea - 1] = default;
 
-            Console.WriteLine("¿Tarea Eliminada con exito!");
+            Console.WriteLine("¡Tarea Eliminada con exito!");
             Console.ReadKey();
+            Console.Clear();
         }
         public virtual void EditarInfo(byte nTarea)
         {
