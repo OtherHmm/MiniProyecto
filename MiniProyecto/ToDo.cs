@@ -24,7 +24,6 @@ namespace MiniProyecto
         }
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
-            Console.WriteLine("       -*  TAREA  *-         ");
             Console.WriteLine($"\nCategoria:    {Tipos[nTarea - 1]}");
             Console.WriteLine($"\nDescripcion:\n{Detalles[nTarea - 1]}\n");
         }

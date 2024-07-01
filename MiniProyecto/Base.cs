@@ -8,16 +8,17 @@ namespace MiniProyecto
         private static string[] Tareas = new string[15]; // lista de las tareas
         static byte ContadorTareas = 0;
 
+        static ToDo ToDo = new ToDo(default, default, default);
+
+        static ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default);
+        static ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default);
+        static ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default);
+
         static void Main()
         {
             bool Salir = false;
             bool Cancelar = false;
-
-            ToDo ToDo = new ToDo(default, default, default);
-
-            ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default);
-            ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default);
-            ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default);
+            
             List<(int Indice, string Nombre, string Tipo, string Detalle)> listaTareas = new List<(int, string, string, string)>();
             do
             {
@@ -107,16 +108,15 @@ namespace MiniProyecto
 
                                 MostrarTareas();
 
-                                Console.WriteLine("Digite el numero de la tarea ");
+                                Console.WriteLine("Digite el numero de la tarea\n ");
                                 byte nTarea = Convert.ToByte(Console.ReadLine());
 
                                 Console.Clear();
-                                Console.WriteLine("");
                                 
-                                Console.WriteLine(Tareas[nTarea]);
-                                Console.WriteLine(ToDo.Tipos[nTarea]);
+                                Console.WriteLine("       -*  TAREA  *-         "); //muestra los detalles de la tarea de ese numero
+                                Console.WriteLine($"Titulo: {Tareas[nTarea-1]}");
+                                ToDo.MostrarInfo(nTarea); 
 
-                                ToDo.MostrarInfo(nTarea); //muestra los detalles de la tarea de ese numero
                                 Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
                                 Console.WriteLine("| 1. Editar tarea                         0. Volver|");
                                 Console.WriteLine("| 2. Borrar tarea                         \n       |");

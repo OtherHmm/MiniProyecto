@@ -16,7 +16,11 @@ namespace MiniProyecto
         {
             Console.WriteLine("De que materia es tu tarea?");
             Materia = Console.ReadLine();
- 
+        }
+        public override void MostrarInfo(byte nTarea)
+        {
+            base.MostrarInfo(nTarea);
+            Console.WriteLine($"\nMateria: {Materia}\n");
         }
     }
 }

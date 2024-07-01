@@ -17,6 +17,22 @@ namespace MiniProyecto
         {
             base.AgregarInfo(tipo, detalle, nTarea);
         }
+        public override void MostrarInfo(byte nTarea)
+        {
+            base.MostrarInfo(nTarea);
+            if (Prioridad == 1) 
+            {
+            Console.WriteLine($"\nPrioridad: Alta\n");
+            }
+            if (Prioridad == 2) 
+            {
+                Console.WriteLine($"\nPrioridad: Intermedia\n");
+            }
+            if (Prioridad == 3) 
+            {
+                Console.WriteLine($"\nPrioridad: Baja\n");
+            }
+        }
         public void PreguntarInfoPersonal()
         {
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");

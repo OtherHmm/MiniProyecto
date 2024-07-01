@@ -23,5 +23,19 @@ namespace MiniProyecto
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
             TrabajoTarea = Convert.ToByte(Console.ReadLine());
         }
+        public override void MostrarInfo(byte nTarea)
+        {
+            base.MostrarInfo(nTarea);
+
+            if (TrabajoTarea == 1)
+            {
+                Console.WriteLine("\nProyecto de oficina \n");
+            }
+            if (TrabajoTarea == 2)
+            {
+                Console.WriteLine("\nProyecto Cliente\n");
+            }
+            
+        }
     }
 }
