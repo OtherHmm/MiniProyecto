@@ -8,10 +8,10 @@ namespace MiniProyecto
 {
     internal class ToDo_Personal : ToDo
     {
-        byte prioridad;
+        byte Prioridad;
         public ToDo_Personal(string tipo, string detalle, byte nTarea, byte prioridad) : base(tipo, detalle, nTarea)
         {
-            this.prioridad = prioridad;
+            Prioridad = prioridad;
         }
         public override void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
@@ -26,7 +26,7 @@ namespace MiniProyecto
             Console.WriteLine("|                 2. Intermedia                   |");
             Console.WriteLine("|                                   3. Baja       |");
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-            prioridad = Convert.ToByte(Console.ReadLine());
+            Prioridad = Convert.ToByte(Console.ReadLine());
         }
     }
 }

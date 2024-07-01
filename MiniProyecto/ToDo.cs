@@ -9,12 +9,10 @@ namespace MiniProyecto
         public static string[] Tipos = new string[15]; // categoria de la tarea
         public static string[] Detalles = new string[15]; // descripcion de la tarea
 
-
-     public ToDo(string tipo, string detalle, byte nTarea)
-       {
-           Tipos[nTarea] = tipo;
-           Detalles[nTarea] = detalle;
-
+        public ToDo(string tipo, string detalle, byte nTarea)
+        {
+            Tipos[nTarea] = tipo;
+            Detalles[nTarea] = detalle;
         }
 
         // Métodos 
@@ -24,13 +22,11 @@ namespace MiniProyecto
             Tipos[nTarea] = tipo;
             Detalles[nTarea] = detalle;
         }
-
         public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
         {
-            Console.WriteLine($"\nTarea {Tipos[nTarea-1]}");
-            Console.WriteLine($"{Detalles[nTarea-1]}\n");
-
-            
+            Console.WriteLine("       -*  TAREA  *-         ");
+            Console.WriteLine($"\nCategoria:    {Tipos[nTarea - 1]}");
+            Console.WriteLine($"\nDescripcion:\n{Detalles[nTarea - 1]}\n");
         }
         public virtual void BorrarInfo(byte nTarea)
         {
@@ -48,22 +44,10 @@ namespace MiniProyecto
             Console.Write("Ingrese la nueva descripción de la tarea: ");
             Detalles[nTarea - 1] = Console.ReadLine();
         }
-
         public static void ActualizarTarea(int indice, string tipo, string detalle)
         {
             Tipos[indice] = tipo;
             Detalles[indice] = detalle;
-          
-        }
-
-        public static string ObtenerTipo(int indice)
-        {
-            return Tipos[indice];
-        }
-
-        public static string ObtenerDetalle(int indice)
-        {
-            return Detalles[indice];
         }
     }
 }

@@ -4,17 +4,15 @@ namespace MiniProyecto
 {
     public class ToDo_Trabajo : ToDo
     {
-        byte trabajoTarea;
+        byte TrabajoTarea;
         public ToDo_Trabajo(string tipo, string detalle, byte nTarea, byte trabajoTarea) : base(tipo, detalle, nTarea)
         {
-            this.trabajoTarea = trabajoTarea;
+            TrabajoTarea = trabajoTarea;
         }
-
         public override void AgregarInfo(string tipo, string detalle, byte nTarea)
         {
             base.AgregarInfo(tipo, detalle, nTarea);
         }
-
         public void PreguntarInfoTrabajo()
         {
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
@@ -23,7 +21,7 @@ namespace MiniProyecto
             Console.WriteLine("|1. Proyecto de oficina                                   |");
             Console.WriteLine("|                             2. Cliente                  |");
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-            trabajoTarea = Convert.ToByte(Console.ReadLine());
+            TrabajoTarea = Convert.ToByte(Console.ReadLine());
         }
     }
 }

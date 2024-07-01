@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MiniProyecto
 {
     public class Base
     {
-        private static string[] Tareas = new string[15]; // tareas
+        private static string[] Tareas = new string[15]; // lista de las tareas
         static byte ContadorTareas = 0;
 
         static void Main()
@@ -24,11 +23,12 @@ namespace MiniProyecto
             {
                 try
                 {
-                    Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0--- 0");
+                    Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
                     Console.WriteLine("|     -                                           -      |");
                     Console.WriteLine("*  -    -   .*.*.*.   ¡Bienvenido!  .*.*.*.    -     -   *");
                     Console.WriteLine("|-        -                                  -          -|");
                     Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
+
                     // lista de tareas
 
                     if (Confirmar() == true)
@@ -42,9 +42,7 @@ namespace MiniProyecto
                     Console.WriteLine("|                                   0. Salir       |");
                     Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 
-                    byte opc = Convert.ToByte(Console.ReadLine());
-
-                    switch (opc)
+                    switch (Convert.ToByte(Console.ReadLine()))
                     {
                         case 1:
                             do
@@ -96,25 +94,20 @@ namespace MiniProyecto
                             } while (!Cancelar);
                             break;
                         case 2:
-                            if (ContadorTareas == 0)
-                            {
-                                Console.Clear();
-                                Console.WriteLine("No podes seleccionar tareas inexistentes.");
-                                Console.WriteLine("");
-                                break;
-                            }
                             do
                             {
-                                
                                 if (Confirmar() == false)
                                 {
+                                    Console.Clear();
+                                    Console.WriteLine("No hay tareas para seleccionar.");
+                                    Console.WriteLine("");
                                     Cancelar = true;
                                     break;
                                 }
 
                                 MostrarTareas();
 
-                                Console.WriteLine("Digite el numero de la tarea  ");
+                                Console.WriteLine("Digite el numero de la tarea ");
                                 byte nTarea = Convert.ToByte(Console.ReadLine());
 
                                 Console.Clear();
@@ -141,6 +134,7 @@ namespace MiniProyecto
                                         ContadorTareas -= 1;
                                         break;
                                     case 0:
+                                        Console.Clear();
                                         Cancelar = true;
                                         break;
                                     default:
@@ -213,7 +207,6 @@ namespace MiniProyecto
         {
             Console.Clear();
             Console.WriteLine("Error! opcion invalida");
-           
         }
         public static bool Confirmar()
         {
@@ -239,9 +232,7 @@ namespace MiniProyecto
                 {
                     Console.WriteLine($"{i + 1}. {Tareas[i]}");
                 }
-               
             }
         }
-      
     }
 }
