@@ -1,52 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace MiniProyecto
 {
     public class ToDo
     {
-        public static string[] Tipos = new string[15]; // categoria de la tarea
-        public static string[] Detalles = new string[15]; // descripcion de la tarea
-
-        public ToDo(string tipo, string detalle, byte nTarea)
+        public static List<Tarea> Tareas = new List<Tarea>(15);
+        public ToDo(string tipo, string detalle, int nTarea, string materia = default, byte prioridad = default, byte trabajoTarea = default)
         {
-            Tipos[nTarea] = tipo;
-            Detalles[nTarea] = detalle;
+            if (Tareas.Count <= nTarea)
+            {
+                Tareas.Add(new Tarea(tipo, detalle, materia, prioridad, trabajoTarea));
+            }
+            else
+            {
+                Tareas[nTarea] = new Tarea(tipo, detalle, materia, prioridad, trabajoTarea);
+            }
         }
-
-        // Métodos 
-
-        public virtual void AgregarInfo(string tipo, string detalle, byte nTarea)
+        public virtual void AgregarInfo(string tipo, string detalle, int nTarea, string materia = default, byte prioridad = default, byte trabajoTarea = default)
         {
-            Tipos[nTarea] = tipo;
-            Detalles[nTarea] = detalle;
+            if (nTarea < Tareas.Count)
+            {
+                Tareas[nTarea].Tipo = tipo;
+                Tareas[nTarea].Detalle = detalle;
+                Tareas[nTarea].Materia = materia;
+                Tareas[nTarea].Prioridad = prioridad;
+                Tareas[nTarea].TrabajoTarea = trabajoTarea;
+            }
+            else
+            {
+                Tareas.Add(new Tarea(tipo, detalle, materia, prioridad, trabajoTarea));
+            }
         }
-        public virtual void MostrarInfo(byte nTarea) // Cuando se elige una tarea
+        public virtual void MostrarInfo(int nTarea)
         {
-            Console.WriteLine($"\nCategoria:    {Tipos[nTarea - 1]}");
-            Console.WriteLine($"\nDescripcion:\n{Detalles[nTarea - 1]}\n");
+            if (nTarea < Tareas.Count)
+            {
+                Console.WriteLine($"\nCategoria:    {Tareas[nTarea].Tipo}");
+                Console.WriteLine($"\nDescripcion:\n{Tareas[nTarea].Detalle}");
+            }
+            else
+            {
+                Console.WriteLine("La tarea no existe.");
+            }
         }
-        public virtual void BorrarInfo(byte nTarea)
+        public virtual void BorrarInfo(int nTarea)
         {
-            Tipos[nTarea - 1] = default;
-            Detalles[nTarea - 1] = default;
-
-            Console.WriteLine("¡Tarea Eliminada con exito!");
-            Console.ReadKey();
-            Console.Clear();
+            if (nTarea < Tareas.Count)
+            {
+                Tareas.RemoveAt(nTarea);
+                Console.WriteLine("¡Tarea Eliminada con éxito!");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else
+            {
+                Console.WriteLine("La tarea no existe.");
+            }
         }
-        public virtual void EditarInfo(byte nTarea)
+        public virtual void EditarInfo(int nTarea)
         {
-            Console.Write("Ingrese el nuevo tipo de la tarea: ");
-            Tipos[nTarea - 1] = Console.ReadLine();
-            Console.Write("Ingrese la nueva descripción de la tarea: ");
-            Detalles[nTarea - 1] = Console.ReadLine();
+            if (nTarea < Tareas.Count)
+            {
+                Console.Write("Ingrese el nuevo tipo de la tarea: ");
+                Tareas[nTarea].Tipo = Console.ReadLine();
+                Console.Write("Ingrese la nueva descripción de la tarea: ");
+                Tareas[nTarea].Detalle = Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("La tarea no existe.");
+            }
         }
-        public static void ActualizarTarea(int indice, string tipo, string detalle)
+        public virtual void AgregarInfoEspecial(int nTarea, string materia = default, byte prioridad = default, byte trabajoTarea = default)
         {
-            Tipos[indice] = tipo;
-            Detalles[indice] = detalle;
+            if (nTarea < Tareas.Count)
+            {
+                Tareas[nTarea].Materia = materia;
+                Tareas[nTarea].Prioridad = prioridad;
+                Tareas[nTarea].TrabajoTarea = trabajoTarea;
+            }
         }
     }
 }
