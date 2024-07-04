@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace MiniProyecto
 {
@@ -194,25 +193,7 @@ namespace MiniProyecto
         }
 
         // Metodos Leer
-
-        /*
-        public static object LeerOpcion<Loquesea>() // Convierte XP
-        {
-            switch (Type.GetTypeCode(typeof(Loquesea)))
-            {
-                case TypeCode.Byte:
-                    return (Loquesea)(object)Convert.ToByte(Console.ReadLine());
-                case TypeCode.Int32:
-                    return (Loquesea)(object)Convert.ToInt32(Console.ReadLine());
-                case TypeCode.Boolean:
-                    return (Loquesea)(object)Convert.ToBoolean(Console.ReadLine());
-                case TypeCode.String:
-                    return (Loquesea)(object)Console.ReadLine();
-                default:
-                    Console.WriteLine("Error");
-                    return default;
-            }
-        }*/
+         
         private static string LeerRespuesta(string mensaje)    /* Código para escriubir algo y leer la respuesta */
         {
             Console.WriteLine(mensaje);
