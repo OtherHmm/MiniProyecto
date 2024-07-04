@@ -45,7 +45,7 @@ namespace MiniProyecto
         {
             if (ConfirmarTareas() == false)
             {
-                Console.WriteLine("\nNo hay tareas :/ ?\n");
+                Console.WriteLine("No hay tareas :/ ?\n");
                 return;
             }
             Console.WriteLine("Lista de tareas\n");
@@ -53,6 +53,7 @@ namespace MiniProyecto
             {
                 Console.WriteLine($"{i + 1}. {ListaTareas[i]}");
             }
+            Console.WriteLine("");
         }
         private static void MostrarMenuPrincipal() 
         {
@@ -61,7 +62,7 @@ namespace MiniProyecto
             Console.WriteLine("|     -                                           -      |");
             Console.WriteLine("*  -    -   .*.*.*.   ¡Bienvenido!  .*.*.*.    -     -   *");
             Console.WriteLine("|-        -                                  -          -|");
-            Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
+            Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0\n");
             MostrarTareas();
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
             Console.WriteLine("|  1. Agregar Tarea                 2. Seleccionar |");
@@ -89,7 +90,7 @@ namespace MiniProyecto
                 Console.WriteLine("|      Seleccione una categoria:        |");
                 Console.WriteLine("|1.Estudio   2.Trabajo   3.Personal     |");
                 Console.WriteLine("|            0.Cancelar                 |");
-                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0");
+                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0\n");
 
                 switch (Convert.ToByte(Console.ReadLine()))
                 {
@@ -114,8 +115,8 @@ namespace MiniProyecto
         }
         private static void AgregarInfoTarea(ToDo tarea, string tipo)
         {
-            string nombre = LeerRespuesta("Digite el nombre");
-            string detalle = LeerRespuesta("Digite la descripcion");
+            string nombre = LeerRespuesta("\nDigite el nombre\n");
+            string detalle = LeerRespuesta("\nDigite la descripcion\n");
 
             tarea.AgregarInfo(tipo, detalle, Convert.ToByte(ListaTareas.Count));
             tarea.AgregarInfoEspecial(Convert.ToByte(ListaTareas.Count),default,default, default);
@@ -132,6 +133,7 @@ namespace MiniProyecto
             if (ConfirmarTareas() == false)
             {
                 MostrarMensajeError("No hay tareas para seleccionar.");
+                Console.ReadKey();
                 return;
             }
             Console.Clear();
@@ -147,6 +149,7 @@ namespace MiniProyecto
             Console.Clear();
             Console.WriteLine("       -*  TAREA  *-         ");
             Console.WriteLine($"\nTítulo: {ListaTareas[nTarea - 1]}");
+
             ToDo.MostrarInfo(nTarea-1);
 
             Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
