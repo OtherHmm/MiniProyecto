@@ -5,16 +5,16 @@ namespace MiniProyecto
 {
     public class ToDo
     {
-        public static List<Tarea> Tareas = new List<Tarea>(15);
+        public static List<To_do> Tareas = new List<To_do>(15);
         public ToDo(string tipo, string detalle, int nTarea, string materia = default, byte prioridad = default, byte trabajoTarea = default)
         {
             if (Tareas.Count <= nTarea)
             {
-                Tareas.Add(new Tarea(tipo, detalle, materia, prioridad, trabajoTarea));
+                Tareas.Add(new To_do(tipo, detalle, materia, prioridad, trabajoTarea));
             }
             else
             {
-                Tareas[nTarea] = new Tarea(tipo, detalle, materia, prioridad, trabajoTarea);
+                Tareas[nTarea] = new To_do(tipo, detalle, materia, prioridad, trabajoTarea);
             }
         }
         public virtual void AgregarInfo(string tipo, string detalle, int nTarea, string materia = default, byte prioridad = default, byte trabajoTarea = default)
@@ -29,7 +29,7 @@ namespace MiniProyecto
             }
             else
             {
-                Tareas.Add(new Tarea(tipo, detalle, materia, prioridad, trabajoTarea));
+                Tareas.Add(new To_do(tipo, detalle, materia, prioridad, trabajoTarea));
             }
         }
         public virtual void MostrarInfo(int nTarea)
