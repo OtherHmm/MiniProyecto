@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 
 namespace MiniProyecto
 {
@@ -13,247 +12,107 @@ namespace MiniProyecto
 
             while (!Salir)
             {
-                Gestor.MostrarMenuInicio();
+                Gestor.MostrarMenuInicio(out Salir);
             }
         }
+    }
+    static public class Gestor
+    {
+        public static Dictionary<int, ToDo> Tareas = new Dictionary<int, ToDo>(15);
 
-        static public class Gestor
+        public static Dictionary<int, ToDo> Actualizar() // volver a poder los indices para que todo quede en orden
         {
-            public static Dictionary<byte, To_do> Tareas = new Dictionary<byte, To_do>(15);
+            int indice = 1;
+            var nuevasTareas = new Dictionary<int, ToDo>();
 
-            public static void MostrarMenuInicio()
+            foreach (var toDo in Tareas)
             {
-                Console.Clear();
-                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
-                Console.WriteLine("|     -                                           -      |");
-                Console.WriteLine("*  -    -   .*.*.*.   ¡Bienvenido!  .*.*.*.    -     -   *");
-                Console.WriteLine("|-        -                                  -          -|");
-                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0\n");
-                MostrarTareas();
-                Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-                Console.WriteLine("|                                   2. Seleccionar |");
-                Console.WriteLine("|                                   0. Salir       |");
-                Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+                nuevasTareas.Add(indice, toDo.Value);
+                indice++;
             }
-            private static void MostrarTareas(string sinTareas = "No hay tareas :/ ?")
+            return nuevasTareas;
+        }
+
+        private static void TareaCrear(out bool salir)
+        {
+            salir = false;
+            while (Tareas.Count <= 15 || salir == false)
             {
-                if (Tareas.Count == 0)
+                MostrarTareas("\nNo hay tareas :/ ?\n\nAgrega una escribiendo y al terminar ENTER ;D");
+
+                string toDo = Console.ReadLine();
+                if (string.IsNullOrEmpty(toDo) || toDo == "0")
                 {
-                    Console.WriteLine($"{sinTareas}\n");
-                    Console.ReadKey();
-                    return;
+                    salir = true;
                 }
-                Console.WriteLine("Lista de tareas\n");
-                var tareas = Tareas.Keys.ToList();
-                for (int i = 0; i < tareas.Count; i++)
+                else if (int.TryParse(toDo, out int indice) && Tareas.ContainsKey(indice - 1))
                 {
-                    Console.WriteLine($"{i + 1}. {tareas[i]}");
-                }
-
-                Console.WriteLine("");
-                while (true)
-                {
-                    bool salir = CrearTarea();
-                    if (salir== true)
-                    {
-                        break;
-                    }
-                }
-                Console.WriteLine();
-            }
-            private static bool CrearTarea() // hacer que tengan indice las tareas
-            {
-                Console.WriteLine("Escribe y luego ENTER para agregar tarea");
-                while (Tareas.Count <= 15)
-                {
-                    Console.Write("Que tienes en mente? ...\t");
-                    string to_do = Console.ReadLine();
-
-                    if (string.IsNullOrEmpty(to_do) == true || to_do == "0")
-                    {
-                        return true;
-                    }
-
-                    Tareas.Add(to_do, new To_do(default, default));
-                }
-                return false;
-            }
-
-
-
-            public static To_do BuscarTarea(int indice)
-            {
-                string NombreTarea = Tareas.Keys.ToList().ElementAtOrDefault(indice).ToString();
-                return Tareas.TryGetValue(NombreTarea, out To_do tarea) ? tarea : default;
-            }
-            public static string BuscarKey(To_do valorTarea)
-            {
-                foreach (var tarea in Tareas)
-                {
-                    if (tarea.Value == valorTarea)
-                    {
-                        return tarea.Key;
-                    }
-                }
-                return default;
-            }
-            public static void EditarInfo(string key)
-            {
-                if (key != default)
-                {
-                    Console.Write("Ingrese el nuevo tipo de la tarea: ");
-                    Tareas[key].Tipo = Console.ReadLine();
-                    Console.Write("Ingrese la nueva descripción de la tarea: ");
-                    Tareas[key].Detalle = Console.ReadLine();
+                    TareaElegir(indice - 1);
                 }
                 else
                 {
-                    Console.WriteLine("La tarea no existe.");
+                    Tareas.Add(Tareas.Count, new ToDo(toDo, default, default));
+                    Console.Clear();
                 }
             }
-            public static void AgregarTarea()
-            {
-                Console.WriteLine("Editando tarea");
-                Console.WriteLine("Ingrese una desripcion");
-                string detalle = Console.ReadLine();
-                MostrarMenuAgregarTarea();
-                string tipo = Console.ReadLine();
-
-                byte prioridad = 1;
-                string materia = "ojdoj";
-                byte trabajaotarea = 2;
-
-                switch (tipo)
-                {
-                    case "1":
-                        materia = "ojdoj";
-                        break;
-                    case "2":
-                        trabajaotarea = 2;
-                        break;
-                    default:
-                        break;
-                }
-
-                Tareas.Add(nombre, new To_do(tipo, detalle, materia, prioridad, trabajaotarea));
-            }
-            public static void MostrarMenuAgregarTarea()
+            salir = false;
+        }
+        private static void TareaElegir(int indice)
+        {
+            Console.Clear();
+            MostrarTareas(sinTareas: "No hay tareas para seleccionar :[");
+            bool salir = false;
+            while (!salir)
             {
                 Console.Clear();
-                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0");
-                Console.WriteLine("|._.-._.-.._.  Editar Tarea ._.-._.-.._.|");
-                Console.WriteLine("*---------------------------------------*");
-                Console.WriteLine("|      Seleccione una categoria:        |");
-                Console.WriteLine("|1.Estudio   2.Trabajo   3.Personal     |");
-                Console.WriteLine("|            0.Cancelar                 |");
-                Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0\n");
-            }
-            public static void MostrarInfo(To_do tarea)
-            {
-                if (tarea == default)
-                {
-                    Console.WriteLine("La tarea no existe.");
-                }
-                else
-                {
-                    Console.WriteLine($"\nCategoria:    {tarea.Tipo}");
-                    Console.WriteLine($"\nDescripcion:\n{tarea.Detalle}");
-                }
-            }
-            public static void BorrarInfo(string key)
-            {
-                Tareas.Remove(key);
-                Console.WriteLine("¡Tarea Eliminada con éxito!");
-                Console.ReadKey();
-            }
-            private static void MostrarMensajeError(string mensaje)    /* Código para mostrar mensajes de error */
-            {
-                Console.Clear();
-                Console.WriteLine($"Error: {mensaje}");
-            }
-
-            // Metodos Opcion Seleccion
-
-            private static void SeleccionarTarea()
-            {
-                Console.Clear();
-                MostrarTareas(sinTareas: "No hay tareas para seleccionar :[");
-
-                Console.WriteLine("Digite el número de la tarea");
-                if (!byte.TryParse(Console.ReadLine(), out byte nTarea) || nTarea < 1 || nTarea > ListaTareas.Capacity)
-                {
-                    MostrarMensajeError("Número de tarea inválido.");
-                    return;
-                }
-
-                Console.Clear();
-                Console.WriteLine("       -*  TAREA  *-         ");
-                Console.WriteLine($"\nTítulo: {ListaTareas[nTarea - 1]}");
-
-                ToDo.MostrarInfo(nTarea - 1);
-
-                Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-                Console.WriteLine("| 1. Editar tarea                         0. Volver|");
-                Console.WriteLine("| 2. Borrar tarea                         \n       |");
-                Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+                Console.WriteLine("                  -*  TAREA  *-                      ");
+                MostrarTareaDetalles(Tareas[indice]);
+                Console.WriteLine("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+                Console.WriteLine("| 1. Editar tarea                         0. Volver |");
+                Console.WriteLine("| 2. Borrar tarea                                   |");
+                Console.WriteLine("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 
                 switch (Convert.ToByte(Console.ReadLine()))
                 {
                     case 0:
                         Console.WriteLine("bye...");
+                        salir = true;
+                        Console.Clear();
                         break;
                     case 1:
-                        EditarTarea(nTarea);
+                        TareaEditar(indice);
                         break;
                     case 2:
-                        BorrarTarea(nTarea);
+                        TareaBorrar(indice);
                         break;
                     default:
                         MostrarMensajeError("Opción inválida.");
                         break;
                 }
             }
-
-            /*
-            public Gestor(string tipo, string detalle, int nTarea, string materia = default, byte prioridad = default, byte trabajoTarea = default)
-            {
-                if (Tareas.Count <= nTarea)
-                {
-                    Tareas.Add(new Tarea(tipo, detalle, materia, prioridad, trabajoTarea));
-                }
-                else
-                {
-                    Tareas[nTarea] = new Tarea(tipo, detalle, materia, prioridad, trabajoTarea);
-                }
-            }
-            */
         }
-        /*
-        public static List<string> ListaTareas = new List<string>(15);
-
-        static ToDo ToDo = new ToDo(default, default, default);
-        static ToDo_Personal TareaPersonal = new ToDo_Personal(default, default, default, default);
-        static ToDo_Trabajo TareaTrabajo = new ToDo_Trabajo(default, default, default, default);
-        static ToDo_Estudio TareaEstudio = new ToDo_Estudio(default, default, default, default);
-        */
-        /*
-        // Metodos 
-        private static void MostrarTareas(string sinohaytareas = "No hay tareas :/ ?")
+        private static void TareaEditar(int key)
         {
-            if (ListaTareas.Count == 0)
+            if (key != default)
             {
-                Console.WriteLine($"{sinohaytareas}\n");
-                Console.ReadKey();
-                return;
+                Console.WriteLine("Ingrese una descripcion: ");
+                string detalle = Console.ReadLine();
+                MostrarMenuTareaTipo();
+                Tareas[key].Tipo = Console.ReadLine();
+                Tareas[key].Detalle = detalle;
             }
-            Console.WriteLine("Lista de tareas\n");
-            for (int i = 0; i < ListaTareas.Count; i++)
+            else
             {
-                Console.WriteLine($"{i + 1}. {ListaTareas[i]}");
+                Console.WriteLine("La tarea no existe.");
             }
-            Console.WriteLine("");
         }
-        private static void MostrarMenuPrincipal()
+        private static void TareaBorrar(int key)
+        {
+            Tareas.Remove(key);
+            Console.WriteLine("¡Tarea Eliminada con éxito!");
+        }
+
+        public static void MostrarMenuInicio(out bool salir)
         {
             Console.Clear();
             Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0");
@@ -261,132 +120,86 @@ namespace MiniProyecto
             Console.WriteLine("*  -    -   .*.*.*.   ¡Bienvenido!  .*.*.*.    -     -   *");
             Console.WriteLine("|-        -                                  -          -|");
             Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0---0---0---0---0\n");
-            MostrarTareas();
-            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-            Console.WriteLine("|  1. Agregar Tarea                 2. Seleccionar |");
-            Console.WriteLine("|                                   0. Salir       |");
-            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+            Console.WriteLine("|  (indice). Para seleccionar una tarea         0. Salir |");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+            TareaCrear(out salir);
         }
-        private static void MostrarMenuAgregarTarea()
+        private static void MostrarTareas(string sinTareas = "No hay tareas :/ ?\nAgrega una ;D")
         {
-            Console.Clear();
+            if (Tareas.Count == 0)
+            {
+                Console.WriteLine($"{sinTareas}\n");
+                return;
+            }
+
+            Console.WriteLine("Lista de tareas\n");
+            foreach (var toDo in Tareas)
+            {
+                Console.WriteLine($"{toDo.Key + 1}. {toDo.Value.Nombre}");
+            }
+            Console.WriteLine("");
+        }
+
+        private static void MostrarMenuTareaTipo()
+        {
             Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0");
-            Console.WriteLine("|._.-._.-.._. Agregar Tarea ._.-._.-.._.|");
+            Console.WriteLine("|._.-.  Seleccione una categoria: .-.._.|");
             Console.WriteLine("*---------------------------------------*");
-            Console.WriteLine("|      Seleccione una categoria:        |");
             Console.WriteLine("|1.Estudio   2.Trabajo   3.Personal     |");
             Console.WriteLine("|            0.Cancelar                 |");
             Console.WriteLine("0---0---0---0---0---0---0---0---0---0---0\n");
         }
-        private static void MostrarMensajeError(string mensaje)    // Código para mostrar mensajes de error
+        private static void MostrarTareaDetalles(ToDo to_doValue)
+        {
+            Console.WriteLine($"\nTítulo: {to_doValue.Nombre}       ");
+            Console.WriteLine($"Tipo: {to_doValue.Tipo}");
+            Console.WriteLine($"\nDescripcion: {to_doValue.Detalle}  ");
+            Console.WriteLine($"\nPrioridad: {to_doValue.Prioridad}");
+        }
+        private static void MostrarMensajeError(string mensaje)
         {
             Console.Clear();
             Console.WriteLine($"Error: {mensaje}");
         }
-
-        // Metodos Opcion Agregar
-
-        private static void AgregarTarea()
+        private static void MostrarTareaDetallesExtra(ToDo tarea)
         {
-            bool cancelar = false;
-
-            do
+            if (tarea == default)
             {
-                MostrarMenuAgregarTarea();
-
-                switch (Convert.ToByte(Console.ReadLine()))
-                {
-                    case 0:
-                        cancelar = true;
-                        break;
-                    case 1:
-                        AgregarInfoTarea(TareaEstudio, "Estudio");
-                        break;
-                    case 2:
-                        AgregarInfoTarea(TareaTrabajo, "Trabajo");
-                        break;
-                    case 3:
-                        AgregarInfoTarea(TareaPersonal, "Personal");
-                        break;
-                    default:
-                        MostrarMensajeError("Opción inválida.");
-                        break;
-                }
-            } while (!cancelar);
-        }
-        private static void AgregarInfoTarea(ToDo tarea, string tipo)
-        {
-            string nombre = LeerRespuesta("\nDigite el nombre\n");
-            string detalle = LeerRespuesta("\nDigite la descripcion\n");
-
-            tarea.AgregarInfo(tipo, detalle, Convert.ToByte(ListaTareas.Count));
-            tarea.AgregarInfoEspecial(Convert.ToByte(ListaTareas.Count), default, default, default);
-
-            ListaTareas.Add(nombre);
-            Console.WriteLine("Tarea agregada exitosamente.");
-            Console.ReadKey();
-        }
-
-        // Metodos Opcion Seleccion
-
-        private static void SeleccionarTarea()
-        {
-            Console.Clear();
-            MostrarTareas(sinohaytareas: "No hay tareas para seleccionar :[");
-
-            Console.WriteLine("Digite el número de la tarea");
-            if (!byte.TryParse(Console.ReadLine(), out byte nTarea) || nTarea < 1 || nTarea > ListaTareas.Capacity)
-            {
-                MostrarMensajeError("Número de tarea inválido.");
-                return;
+                Console.WriteLine("La tarea no existe.");
             }
-
-            Console.Clear();
-            Console.WriteLine("       -*  TAREA  *-         ");
-            Console.WriteLine($"\nTítulo: {ListaTareas[nTarea - 1]}");
-
-            ToDo.MostrarInfo(nTarea - 1);
-
-            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-            Console.WriteLine("| 1. Editar tarea                         0. Volver|");
-            Console.WriteLine("| 2. Borrar tarea                         \n       |");
-            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-
-            switch (Convert.ToByte(Console.ReadLine()))
+            else
             {
-                case 0:
-                    Console.WriteLine("bye...");
-                    break;
-                case 1:
-                    EditarTarea(nTarea);
-                    break;
-                case 2:
-                    BorrarTarea(nTarea);
-                    break;
-                default:
-                    MostrarMensajeError("Opción inválida.");
-                    break;
+                Console.WriteLine($"\nCategoria:    {tarea.Tipo}");
+                Console.WriteLine($"\nDescripcion:\n{tarea.Detalle}");
             }
         }
-        private static void EditarTarea(byte nTarea)
-        {
-            string nuevoTitulo = LeerRespuesta("Ingrese el nuevo título de la tarea");
-            ListaTareas[nTarea - 1] = nuevoTitulo;
-            ToDo.EditarInfo(nTarea - 1);
 
-        }
-        private static void BorrarTarea(byte nTarea)
+        private static void AgregarInfoExtra(out string materia)
         {
-            ListaTareas.RemoveAt(nTarea - 1);
-            ToDo.BorrarInfo(nTarea - 1);
-        }
-
-        // Metodos Leer
-
-        private static string LeerRespuesta(string mensaje)    // Código para escriubir algo y leer la respuesta
+            Console.WriteLine("De que materia es tu tarea?");
+            materia = Console.ReadLine();
+        } // tipo tarea
+        private static void AgregarInfoExtra(out int prioridad)
         {
-            Console.WriteLine(mensaje);
-            return Console.ReadLine();
-        }*/
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            Console.WriteLine("|       Cual es la prioridad de tu tarea?         |");
+            Console.WriteLine("--------------------------------------------------|");
+            Console.WriteLine("|1. Alta                                          |");
+            Console.WriteLine("|                 2. Intermedia                   |");
+            Console.WriteLine("|                                   3. Baja       |");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            prioridad = Convert.ToByte(Console.ReadLine());
+        } // tipo personal
+        private static void AgregarInfoExtra(out char tipo)
+        {
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            Console.WriteLine("| Su tarea pendiente es para oficina (proyecto) o cliente?|");
+            Console.WriteLine("----------------------------------------------------------|");
+            Console.WriteLine("|1. Proyecto de oficina                                   |");
+            Console.WriteLine("|                             2. Cliente                  |");
+            Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+            tipo = Convert.ToChar(Console.ReadLine());
+        } // tipo trabajo
     }
 }
